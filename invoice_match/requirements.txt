@@ -1,0 +1,6 @@
+# Runtime is stdlib only (tomllib, csv, json, xml.etree, urllib, dataclasses,
+# decimal). pytest is only needed to run the test suite.
+pytest>=7.0
+# markdown is only needed to render README.md -> docs/index.html
+# (build_readme.py); not used by run_match.py or the test suite.
+markdown>=3.5

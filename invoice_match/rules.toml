@@ -1,0 +1,39 @@
+# Business knobs for invoice_match. Every tolerance, routing target and KPI
+# assumption used by the pipeline lives here - nowhere in the Python code -
+# so a change to policy (e.g. "tighten the price tolerance to 0.5%") is a
+# one-line config edit, not a code change, and is visible in the report's
+# "How decisions are made" section.
+
+[tolerance]
+price_pct = 1.0        # per-unit price deviation vs PO allowed without human review (%)
+total_abs_eur = 5.00    # absolute EUR tolerance for the arithmetic reconciliation check
+qty_tolerance = 0       # units of short delivery allowed without a finding
+
+[duplicates]
+fuzzy_window_days = 45  # same supplier + same gross amount within this many days -> possible duplicate
+
+[hold]
+skonto_risk_days = 3    # flag a HOLD as skonto-at-risk if its deadline is within this many days
+
+[routing]
+# rule_id -> role/queue that should work the exception.
+SUPPLIER_UNKNOWN   = "Kreditorenbuchhaltung"
+PO_UNKNOWN         = "Kreditorenbuchhaltung"
+PRICE_DEVIATION    = "Einkauf (Category Buyer)"
+QTY_SHORT          = "Filiale / Wareneingang"
+GR_NOT_POSTED      = "automatische Wiedervorlage"
+DUPLICATE_EXACT    = "Kreditorenbuchhaltung"
+DUPLICATE_FUZZY    = "Kreditorenbuchhaltung"
+IBAN_MISMATCH      = "Finance Lead (Vier-Augen-Prinzip)"
+ARITHMETIC_MISMATCH = "Kreditorenbuchhaltung"
+
+[kpi]
+# Batch facts are extrapolated to a monthly/yearly view using these
+# assumptions (see apmatch/kpi.py for the exact formulas - kept in one
+# place, each with a docstring, and shown next to the numbers in the report).
+invoices_per_month = 400
+manual_minutes_per_invoice = 9        # open mail, download, type into ERP, look up PO + GR, compare, post
+exception_minutes_manual = 25         # a clerk handling an exception fully manually, no pre-analysis (reference figure, not used in hours_after)
+exception_minutes_assisted = 12       # human still decides, but gets pre-analysis + a drafted action
+skonto_eligible_share_lost_today = 0.40  # share of skonto-eligible invoices where the discount is missed today (estimate)
+hourly_cost_eur = 45
