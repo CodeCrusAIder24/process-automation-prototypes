@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:ID>RE-2026-6010</cbc:ID>
+  <cbc:IssueDate>2026-09-22</cbc:IssueDate>
+  <cbc:OrderReference><cbc:ID>PO-2026-0410</cbc:ID></cbc:OrderReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyName><cbc:Name>Pflanzenhof Meyer e.K.</cbc:Name></cac:PartyName>
+      <cac:PartyTaxScheme><cbc:CompanyID>DE667345912</cbc:CompanyID></cac:PartyTaxScheme>
+      <cac:PayeeFinancialAccount><cbc:ID>DE23300606010923456712</cbc:ID></cac:PayeeFinancialAccount>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyName><cbc:Name>Brandt Haus und Garten GmbH - Filiale PIN1</cbc:Name></cac:PartyName>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity>15</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">193.50</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Description>Buchsbaum 40cm</cbc:Description>
+      <cac:SellersItemIdentification><cbc:ID>PM-BUXUS</cbc:ID></cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price><cbc:PriceAmount currencyID="EUR">12.90</cbc:PriceAmount></cac:Price>
+  </cac:InvoiceLine>
+  <cac:InvoiceLine>
+    <cbc:ID>2</cbc:ID>
+    <cbc:InvoicedQuantity>20</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">158.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Description>Rosenstock</cbc:Description>
+      <cac:SellersItemIdentification><cbc:ID>PM-ROSE</cbc:ID></cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price><cbc:PriceAmount currencyID="EUR">7.90</cbc:PriceAmount></cac:Price>
+  </cac:InvoiceLine>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">24.61</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="EUR">351.50</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">24.61</cbc:TaxAmount>
+      <cac:TaxCategory><cbc:Percent>7.00</cbc:Percent></cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">351.50</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">351.50</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="EUR">376.11</cbc:TaxInclusiveAmount>
+    <cbc:PayableAmount currencyID="EUR">376.11</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+</Invoice>

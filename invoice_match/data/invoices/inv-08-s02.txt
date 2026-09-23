@@ -1,0 +1,27 @@
+Werkzeug Kraemer KG - Industriestr. 14, 24118 Kiel
+USt-IdNr. DE229517634    IBAN DE34600501010023456789
+
+Rechnung Nr. RE-2026-6008
+Datum: 19.09.2026
+Bestellnummer: PO-2026-0408
+Kunde: Brandt Haus & Garten GmbH, Filiale REN1
+
+Pos. 1
+Art.-Nr.: WK-SAEGE
+Artikel: Handsäge
+Menge: 20
+Einzelpreis: 13,50 EUR
+Gesamt: 270,00 EUR
+
+Pos. 2
+Art.-Nr.: WK-HANDSCH
+Artikel: Gartenhandschuhe Set
+Menge: 40
+Einzelpreis: 6,90 EUR
+Gesamt: 276,00 EUR
+
+Nettobetrag: 546,00 EUR
+USt 19 %: 103,74 EUR
+Bruttobetrag: 649,74 EUR
+
+Zahlungsbedingungen: 3% Skonto bei Zahlung innerhalb 14 Tagen. Sonst zahlbar netto innerhalb 45 Tagen.

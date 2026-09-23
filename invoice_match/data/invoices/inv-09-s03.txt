@@ -1,0 +1,29 @@
+Holzland Petersen GmbH
+Sägewerkweg 3
+23558 Luebeck
+USt-IdNr.: DE334892176
+IBAN: DE56700202700123456780
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale ELM1
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Rechnungsnummer: RE-2026-6009
+Rechnungsdatum: 21.09.2026
+Ihre Bestellung: PO-2026-0409
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    HP-UHK       Unterkonstruktion Alu              30      9,20 EUR  276,00 EUR
+2    HP-SCHRAUBEN Terrassenschrauben Edelstahl       50      2,15 EUR  107,50 EUR
+3    HP-DIELE     Terrassendiele Laerche 4m          20     18,50 EUR  370,00 EUR
+
+Nettobetrag:                                            753,50 EUR
+USt 19%:                                               143,17 EUR
+Bruttobetrag:                                            896,67 EUR
+
+Zahlungsbedingungen: 2% Skonto bei Zahlung innerhalb 10 Tagen, sonst netto 30 Tage.

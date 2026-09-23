@@ -1,0 +1,29 @@
+Lichtwerk Elektro GmbH
+Stromstr. 21
+24941 Flensburg
+USt-IdNr.: DE445123987
+IBAN: DE78500400005012345678
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale FL1
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Rechnungsnummer: RE-2026-6004
+Rechnungsdatum: 18.09.2026
+Ihre Bestellung: PO-2026-0404
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    LE-LED60     LED-Strahler 60W                   15     34,90 EUR  523,50 EUR
+2    LE-KABEL     Gartenkabel 20m                    10     16,80 EUR  168,00 EUR
+3    LE-TIMER     Zeitschaltuhr                      12      9,40 EUR  112,80 EUR
+
+Nettobetrag:                                            804,30 EUR
+USt 19%:                                               152,82 EUR
+Bruttobetrag:                                            957,12 EUR
+
+Zahlungsbedingungen: Keine Skontogewaehrung, sonst netto 30 Tage.

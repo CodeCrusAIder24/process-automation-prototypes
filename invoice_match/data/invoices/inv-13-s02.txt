@@ -1,0 +1,28 @@
+Werkzeug Kraemer KG
+Industriestr. 14
+24118 Kiel
+USt-IdNr.: DE229517634
+IBAN: DE34600501010023456789
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale KI2
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Rechnungsnummer: RE-2026-6013
+Rechnungsdatum: 18.09.2026
+Ihre Bestellung: PO-2026-0413
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    WK-HANDSCH   Gartenhandschuhe Set               40      6,90 EUR  276,00 EUR
+2    WK-SCHERE    Gartenschere                       15      9,75 EUR  146,25 EUR
+
+Nettobetrag:                                            422,25 EUR
+USt 19%:                                               80,23 EUR
+Bruttobetrag:                                            502,48 EUR
+
+Zahlungsbedingungen: 3% Skonto bei Zahlung innerhalb 14 Tagen, sonst netto 45 Tage.

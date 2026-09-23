@@ -1,0 +1,30 @@
+Holzland Petersen GmbH
+Sägewerkweg 3
+23558 Luebeck
+USt-IdNr.: DE334892176
+IBAN: DE56700202700123456780
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale ITZ2
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Zweitschrift / Zahlungserinnerung zu Rechnung RE-2026-3301
+
+Rechnungsnummer: RE-2026-3301
+Rechnungsdatum: 14.09.2026
+Ihre Bestellung: PO-2026-0415
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    HP-SCHRAUBEN Terrassenschrauben Edelstahl       40      2,15 EUR   86,00 EUR
+2    HP-PFOSTEN   Holzpfosten 9x9                    10     12,40 EUR  124,00 EUR
+
+Nettobetrag:                                            210,00 EUR
+USt 19%:                                               39,90 EUR
+Bruttobetrag:                                            249,90 EUR
+
+Zahlungsbedingungen: 2% Skonto bei Zahlung innerhalb 10 Tagen, sonst netto 30 Tage.

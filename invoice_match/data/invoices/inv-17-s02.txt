@@ -1,0 +1,27 @@
+Werkzeug Kraemer KG - Industriestr. 14, 24118 Kiel
+USt-IdNr. DE229517634    IBAN DE34600501010023456789
+
+Rechnung Nr. RE-2026-6017
+Datum: 21.09.2026
+Bestellnummer: PO-2026-0499
+Kunde: Brandt Haus & Garten GmbH, Filiale NMS2
+
+Pos. 1
+Art.-Nr.: WK-SPAT
+Artikel: Spaten
+Menge: 10
+Einzelpreis: 14,90 EUR
+Gesamt: 149,00 EUR
+
+Pos. 2
+Art.-Nr.: WK-SCHERE
+Artikel: Gartenschere
+Menge: 10
+Einzelpreis: 9,75 EUR
+Gesamt: 97,50 EUR
+
+Nettobetrag: 246,50 EUR
+USt 19 %: 46,84 EUR
+Bruttobetrag: 293,34 EUR
+
+Zahlungsbedingungen: 3% Skonto bei Zahlung innerhalb 14 Tagen. Sonst zahlbar netto innerhalb 45 Tagen.

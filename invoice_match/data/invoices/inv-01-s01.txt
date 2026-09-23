@@ -1,0 +1,29 @@
+Gartenbedarf Nord GmbH
+Moorweide 8
+22765 Hamburg
+USt-IdNr.: DE118743205
+IBAN: DE12500105170648512345
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale HH1
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Rechnungsnummer: RE-2026-6001
+Rechnungsdatum: 15.09.2026
+Ihre Bestellung: PO-2026-0401
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    GN-ERDE20    Blumenerde 20L                     40      4,20 EUR  168,00 EUR
+2    GN-TOPF30    Pflanzkuebel 30cm                  20      8,90 EUR  178,00 EUR
+3    GN-DUENGER   Universaldünger 5kg                15      6,50 EUR   97,50 EUR
+
+Nettobetrag:                                            443,50 EUR
+USt 19%:                                               84,27 EUR
+Bruttobetrag:                                            527,77 EUR
+
+Zahlungsbedingungen: 2% Skonto bei Zahlung innerhalb 10 Tagen, sonst netto 30 Tage.

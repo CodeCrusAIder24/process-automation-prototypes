@@ -1,0 +1,27 @@
+Farben Albers OHG - Malerweg 5, 25813 Husum
+USt-IdNr. DE556234871    IBAN DE90200411330012345671
+
+Rechnung Nr. RE-2026-6005
+Datum: 20.09.2026
+Bestellnummer: PO-2026-0405
+Kunde: Brandt Haus & Garten GmbH, Filiale NMS1
+
+Pos. 1
+Art.-Nr.: FA-LASUR
+Artikel: Holzlasur 2.5L
+Menge: 18
+Einzelpreis: 22,90 EUR
+Gesamt: 412,20 EUR
+
+Pos. 2
+Art.-Nr.: FA-GRUND
+Artikel: Grundierung 5L
+Menge: 10
+Einzelpreis: 19,50 EUR
+Gesamt: 195,00 EUR
+
+Nettobetrag: 607,20 EUR
+USt 19 %: 115,37 EUR
+Bruttobetrag: 722,57 EUR
+
+Zahlungsbedingungen: 2% Skonto bei Zahlung innerhalb 8 Tagen. Sonst zahlbar netto innerhalb 30 Tagen.

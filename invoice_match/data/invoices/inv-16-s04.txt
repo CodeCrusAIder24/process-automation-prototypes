@@ -1,0 +1,28 @@
+Lichtwerk Elektro GmbH
+Stromstr. 21
+24941 Flensburg
+USt-IdNr.: DE445123987
+IBAN: DE55100110012098765432
+
+RECHNUNG
+
+An:
+Brandt Haus & Garten GmbH
+Filiale REN2
+Speicherstadt 1
+20457 Hamburg
+USt-IdNr. Kunde: DE287451902
+
+Rechnungsnummer: RE-2026-6016
+Rechnungsdatum: 16.09.2026
+Ihre Bestellung: PO-2026-0416
+
+Pos. Art.-Nr.     Artikel                         Menge   Einzelpreis      Gesamt
+1    LE-SOLAR     Solarleuchte                       20     11,20 EUR  224,00 EUR
+2    LE-TIMER     Zeitschaltuhr                      15      9,40 EUR  141,00 EUR
+
+Nettobetrag:                                            365,00 EUR
+USt 19%:                                               69,35 EUR
+Bruttobetrag:                                            434,35 EUR
+
+Zahlungsbedingungen: Keine Skontogewaehrung, sonst netto 30 Tage.
