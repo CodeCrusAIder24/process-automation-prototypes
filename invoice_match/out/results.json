@@ -1,0 +1,1105 @@
+{
+  "generated_at": "2026-09-23T21:19:35.165145+00:00",
+  "today": "2026-09-23",
+  "extraction_mode": "heuristic",
+  "batch_kpis": {
+    "total_invoices": 18,
+    "approved": 11,
+    "exceptions": 4,
+    "holds": 1,
+    "blocked": 2,
+    "touchless_rate_pct": 61.1,
+    "money_at_risk_by_rule": {
+      "PRICE_DEVIATION": "31.50",
+      "QTY_SHORT": "55.20",
+      "DUPLICATE": "249.90",
+      "IBAN_MISMATCH": "434.35",
+      "ARITHMETIC_MISMATCH": "10.00"
+    },
+    "money_at_risk_total_eur": "780.95",
+    "skonto_captured_eur": "156.11"
+  },
+  "extrapolation": {
+    "invoices_per_month": "400",
+    "human_share_pct": "33.3",
+    "hours_before_per_month": "95.6",
+    "hours_after_per_month": "26.7",
+    "hours_saved_per_month": "68.9",
+    "fte_equivalent": "0.49",
+    "cost_saved_eur_per_month": "3100.00",
+    "cost_saved_eur_per_year": "37200.00"
+  },
+  "skonto_recovered_per_year_eur": "26301.60",
+  "results": [
+    {
+      "invoice": {
+        "source_file": "inv-01-s01.txt",
+        "supplier_vat_id": "DE118743205",
+        "invoice_number": "RE-2026-6001",
+        "invoice_date": "2026-09-15",
+        "po_number": "PO-2026-0401",
+        "iban": "DE12500105170648512345",
+        "net_eur": "443.50",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "84.27",
+        "gross_eur": "527.77",
+        "lines": [
+          {
+            "sku": "GN-ERDE20",
+            "description": "Blumenerde 20L",
+            "qty": "40",
+            "unit_price_eur": "4.20",
+            "line_total_eur": "168.00"
+          },
+          {
+            "sku": "GN-TOPF30",
+            "description": "Pflanzkuebel 30cm",
+            "qty": "20",
+            "unit_price_eur": "8.90",
+            "line_total_eur": "178.00"
+          },
+          {
+            "sku": "GN-DUENGER",
+            "description": "Universaldünger 5kg",
+            "qty": "15",
+            "unit_price_eur": "6.50",
+            "line_total_eur": "97.50"
+          }
+        ],
+        "store": "HH1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S01",
+        "name": "Gartenbedarf Nord GmbH",
+        "vat_id": "DE118743205",
+        "iban": "DE12500105170648512345",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "527.77",
+      "skonto_eur": "10.56",
+      "skonto_deadline": "2026-09-25",
+      "pay_by": "2026-09-25",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-02-s02.txt",
+        "supplier_vat_id": "DE229517634",
+        "invoice_number": "RE-2026-6002",
+        "invoice_date": "2026-09-14",
+        "po_number": "PO-2026-0402",
+        "iban": "DE34600501010023456789",
+        "net_eur": "945.00",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "179.55",
+        "gross_eur": "1124.55",
+        "lines": [
+          {
+            "sku": "WK-SPAT",
+            "description": "Spaten",
+            "qty": "25",
+            "unit_price_eur": "14.90",
+            "line_total_eur": "372.50"
+          },
+          {
+            "sku": "WK-HARKE",
+            "description": "Harke",
+            "qty": "25",
+            "unit_price_eur": "11.20",
+            "line_total_eur": "280.00"
+          },
+          {
+            "sku": "WK-SCHERE",
+            "description": "Gartenschere",
+            "qty": "30",
+            "unit_price_eur": "9.75",
+            "line_total_eur": "292.50"
+          }
+        ],
+        "store": "KI1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S02",
+        "name": "Werkzeug Kraemer KG",
+        "vat_id": "DE229517634",
+        "iban": "DE34600501010023456789",
+        "skonto_pct": "3.0",
+        "skonto_days": 14,
+        "net_days": 45
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "1124.55",
+      "skonto_eur": "33.74",
+      "skonto_deadline": "2026-09-28",
+      "pay_by": "2026-09-28",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-03-s03.xml",
+        "supplier_vat_id": "DE334892176",
+        "invoice_number": "RE-2026-6003",
+        "invoice_date": "2026-09-16",
+        "po_number": "PO-2026-0403",
+        "iban": "DE56700202700123456780",
+        "net_eur": "1358.00",
+        "vat_rate_pct": "19.00",
+        "vat_amount_eur": "258.02",
+        "gross_eur": "1616.02",
+        "lines": [
+          {
+            "sku": "HP-DIELE",
+            "description": "Terrassendiele Laerche 4m",
+            "qty": "60",
+            "unit_price_eur": "18.50",
+            "line_total_eur": "1110.00"
+          },
+          {
+            "sku": "HP-PFOSTEN",
+            "description": "Holzpfosten 9x9",
+            "qty": "20",
+            "unit_price_eur": "12.40",
+            "line_total_eur": "248.00"
+          }
+        ],
+        "store": "LU1",
+        "extraction_source": "e-invoice",
+        "extraction_note": "Structured XML e-invoice, extraction skipped."
+      },
+      "supplier": {
+        "supplier_id": "S03",
+        "name": "Holzland Petersen GmbH",
+        "vat_id": "DE334892176",
+        "iban": "DE56700202700123456780",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "1616.02",
+      "skonto_eur": "32.32",
+      "skonto_deadline": "2026-09-26",
+      "pay_by": "2026-09-26",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-04-s04.txt",
+        "supplier_vat_id": "DE445123987",
+        "invoice_number": "RE-2026-6004",
+        "invoice_date": "2026-09-18",
+        "po_number": "PO-2026-0404",
+        "iban": "DE78500400005012345678",
+        "net_eur": "804.30",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "152.82",
+        "gross_eur": "957.12",
+        "lines": [
+          {
+            "sku": "LE-LED60",
+            "description": "LED-Strahler 60W",
+            "qty": "15",
+            "unit_price_eur": "34.90",
+            "line_total_eur": "523.50"
+          },
+          {
+            "sku": "LE-KABEL",
+            "description": "Gartenkabel 20m",
+            "qty": "10",
+            "unit_price_eur": "16.80",
+            "line_total_eur": "168.00"
+          },
+          {
+            "sku": "LE-TIMER",
+            "description": "Zeitschaltuhr",
+            "qty": "12",
+            "unit_price_eur": "9.40",
+            "line_total_eur": "112.80"
+          }
+        ],
+        "store": "FL1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S04",
+        "name": "Lichtwerk Elektro GmbH",
+        "vat_id": "DE445123987",
+        "iban": "DE78500400005012345678",
+        "skonto_pct": "0.0",
+        "skonto_days": 0,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "957.12",
+      "skonto_eur": "0.00",
+      "skonto_deadline": null,
+      "pay_by": "2026-10-18",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-05-s05.txt",
+        "supplier_vat_id": "DE556234871",
+        "invoice_number": "RE-2026-6005",
+        "invoice_date": "2026-09-20",
+        "po_number": "PO-2026-0405",
+        "iban": "DE90200411330012345671",
+        "net_eur": "607.20",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "115.37",
+        "gross_eur": "722.57",
+        "lines": [
+          {
+            "sku": "FA-LASUR",
+            "description": "Holzlasur 2.5L",
+            "qty": "18",
+            "unit_price_eur": "22.90",
+            "line_total_eur": "412.20"
+          },
+          {
+            "sku": "FA-GRUND",
+            "description": "Grundierung 5L",
+            "qty": "10",
+            "unit_price_eur": "19.50",
+            "line_total_eur": "195.00"
+          }
+        ],
+        "store": "NMS1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S05",
+        "name": "Farben Albers OHG",
+        "vat_id": "DE556234871",
+        "iban": "DE90200411330012345671",
+        "skonto_pct": "2.0",
+        "skonto_days": 8,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "722.57",
+      "skonto_eur": "14.45",
+      "skonto_deadline": "2026-09-28",
+      "pay_by": "2026-09-28",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-06-s06.txt",
+        "supplier_vat_id": "DE667345912",
+        "invoice_number": "RE-2026-6006",
+        "invoice_date": "2026-09-17",
+        "po_number": "PO-2026-0406",
+        "iban": "DE23300606010923456712",
+        "net_eur": "689.00",
+        "vat_rate_pct": "7",
+        "vat_amount_eur": "48.23",
+        "gross_eur": "737.23",
+        "lines": [
+          {
+            "sku": "PM-ROSE",
+            "description": "Rosenstock",
+            "qty": "40",
+            "unit_price_eur": "7.90",
+            "line_total_eur": "316.00"
+          },
+          {
+            "sku": "PM-HORT",
+            "description": "Hortensie",
+            "qty": "25",
+            "unit_price_eur": "9.40",
+            "line_total_eur": "235.00"
+          },
+          {
+            "sku": "PM-LAVENDEL",
+            "description": "Lavendel 3L Topf",
+            "qty": "30",
+            "unit_price_eur": "4.60",
+            "line_total_eur": "138.00"
+          }
+        ],
+        "store": "NOR1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S06",
+        "name": "Pflanzenhof Meyer e.K.",
+        "vat_id": "DE667345912",
+        "iban": "DE23300606010923456712",
+        "skonto_pct": "1.5",
+        "skonto_days": 10,
+        "net_days": 21
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "737.23",
+      "skonto_eur": "11.06",
+      "skonto_deadline": "2026-09-27",
+      "pay_by": "2026-09-27",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-07-s01.xml",
+        "supplier_vat_id": "DE118743205",
+        "invoice_number": "RE-2026-6007",
+        "invoice_date": "2026-09-10",
+        "po_number": "PO-2026-0407",
+        "iban": "DE12500105170648512345",
+        "net_eur": "436.00",
+        "vat_rate_pct": "19.00",
+        "vat_amount_eur": "82.84",
+        "gross_eur": "518.84",
+        "lines": [
+          {
+            "sku": "GN-MULCH",
+            "description": "Rindenmulch 60L",
+            "qty": "50",
+            "unit_price_eur": "5.60",
+            "line_total_eur": "280.00"
+          },
+          {
+            "sku": "GN-TORF",
+            "description": "Pflanzsubstrat 45L",
+            "qty": "20",
+            "unit_price_eur": "7.80",
+            "line_total_eur": "156.00"
+          }
+        ],
+        "store": "ITZ1",
+        "extraction_source": "e-invoice",
+        "extraction_note": "Structured XML e-invoice, extraction skipped."
+      },
+      "supplier": {
+        "supplier_id": "S01",
+        "name": "Gartenbedarf Nord GmbH",
+        "vat_id": "DE118743205",
+        "iban": "DE12500105170648512345",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "518.84",
+      "skonto_eur": "0.00",
+      "skonto_deadline": "2026-09-20",
+      "pay_by": "2026-10-10",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-08-s02.txt",
+        "supplier_vat_id": "DE229517634",
+        "invoice_number": "RE-2026-6008",
+        "invoice_date": "2026-09-19",
+        "po_number": "PO-2026-0408",
+        "iban": "DE34600501010023456789",
+        "net_eur": "546.00",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "103.74",
+        "gross_eur": "649.74",
+        "lines": [
+          {
+            "sku": "WK-SAEGE",
+            "description": "Handsäge",
+            "qty": "20",
+            "unit_price_eur": "13.50",
+            "line_total_eur": "270.00"
+          },
+          {
+            "sku": "WK-HANDSCH",
+            "description": "Gartenhandschuhe Set",
+            "qty": "40",
+            "unit_price_eur": "6.90",
+            "line_total_eur": "276.00"
+          }
+        ],
+        "store": "REN1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S02",
+        "name": "Werkzeug Kraemer KG",
+        "vat_id": "DE229517634",
+        "iban": "DE34600501010023456789",
+        "skonto_pct": "3.0",
+        "skonto_days": 14,
+        "net_days": 45
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "649.74",
+      "skonto_eur": "19.49",
+      "skonto_deadline": "2026-10-03",
+      "pay_by": "2026-10-03",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-09-s03.txt",
+        "supplier_vat_id": "DE334892176",
+        "invoice_number": "RE-2026-6009",
+        "invoice_date": "2026-09-21",
+        "po_number": "PO-2026-0409",
+        "iban": "DE56700202700123456780",
+        "net_eur": "753.50",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "143.17",
+        "gross_eur": "896.67",
+        "lines": [
+          {
+            "sku": "HP-UHK",
+            "description": "Unterkonstruktion Alu",
+            "qty": "30",
+            "unit_price_eur": "9.20",
+            "line_total_eur": "276.00"
+          },
+          {
+            "sku": "HP-SCHRAUBEN",
+            "description": "Terrassenschrauben Edelstahl",
+            "qty": "50",
+            "unit_price_eur": "2.15",
+            "line_total_eur": "107.50"
+          },
+          {
+            "sku": "HP-DIELE",
+            "description": "Terrassendiele Laerche 4m",
+            "qty": "20",
+            "unit_price_eur": "18.50",
+            "line_total_eur": "370.00"
+          }
+        ],
+        "store": "ELM1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S03",
+        "name": "Holzland Petersen GmbH",
+        "vat_id": "DE334892176",
+        "iban": "DE56700202700123456780",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "896.67",
+      "skonto_eur": "17.93",
+      "skonto_deadline": "2026-10-01",
+      "pay_by": "2026-10-01",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-10-s06.xml",
+        "supplier_vat_id": "DE667345912",
+        "invoice_number": "RE-2026-6010",
+        "invoice_date": "2026-09-22",
+        "po_number": "PO-2026-0410",
+        "iban": "DE23300606010923456712",
+        "net_eur": "351.50",
+        "vat_rate_pct": "7.00",
+        "vat_amount_eur": "24.61",
+        "gross_eur": "376.11",
+        "lines": [
+          {
+            "sku": "PM-BUXUS",
+            "description": "Buchsbaum 40cm",
+            "qty": "15",
+            "unit_price_eur": "12.90",
+            "line_total_eur": "193.50"
+          },
+          {
+            "sku": "PM-ROSE",
+            "description": "Rosenstock",
+            "qty": "20",
+            "unit_price_eur": "7.90",
+            "line_total_eur": "158.00"
+          }
+        ],
+        "store": "PIN1",
+        "extraction_source": "e-invoice",
+        "extraction_note": "Structured XML e-invoice, extraction skipped."
+      },
+      "supplier": {
+        "supplier_id": "S06",
+        "name": "Pflanzenhof Meyer e.K.",
+        "vat_id": "DE667345912",
+        "iban": "DE23300606010923456712",
+        "skonto_pct": "1.5",
+        "skonto_days": 10,
+        "net_days": 21
+      },
+      "findings": [],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "376.11",
+      "skonto_eur": "5.64",
+      "skonto_deadline": "2026-10-02",
+      "pay_by": "2026-10-02",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-11-s01.txt",
+        "supplier_vat_id": "DE118743205",
+        "invoice_number": "RE-2026-6011",
+        "invoice_date": "2026-09-19",
+        "po_number": "PO-2026-0411",
+        "iban": "DE12500105170648512345",
+        "net_eur": "458.70",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "87.15",
+        "gross_eur": "545.85",
+        "lines": [
+          {
+            "sku": "GN-DUENGER",
+            "description": "Universaldünger 5kg",
+            "qty": "30",
+            "unit_price_eur": "12.49",
+            "line_total_eur": "374.70"
+          },
+          {
+            "sku": "GN-ERDE20",
+            "description": "Blumenerde 20L",
+            "qty": "20",
+            "unit_price_eur": "4.20",
+            "line_total_eur": "84.00"
+          }
+        ],
+        "store": "BSG1",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S01",
+        "name": "Gartenbedarf Nord GmbH",
+        "vat_id": "DE118743205",
+        "iban": "DE12500105170648512345",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [
+        {
+          "rule_id": "PRICE_WITHIN_TOLERANCE",
+          "severity": "info",
+          "message": "Price deviation within tolerance: GN-DUENGER: 12,49 EUR vs PO 12,45 EUR (0.32% - within tolerance)",
+          "route_to": "-",
+          "suggested_action": "None - informational only.",
+          "amount_impact_eur": "0.00",
+          "hold": false,
+          "details": {
+            "lines": [
+              {
+                "sku": "GN-DUENGER",
+                "qty": "30",
+                "invoiced_price": "12.49",
+                "po_price": "12.45",
+                "deviation_pct": "0.3212851405622489959839357430"
+              }
+            ]
+          }
+        }
+      ],
+      "decision": "APPROVED",
+      "route_to": "Automatisch verbucht (kein Review erforderlich)",
+      "payable_eur": "545.85",
+      "skonto_eur": "10.92",
+      "skonto_deadline": "2026-09-29",
+      "pay_by": "2026-09-29",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-12-s05.txt",
+        "supplier_vat_id": "DE556234871",
+        "invoice_number": "RE-2026-6012",
+        "invoice_date": "2026-09-15",
+        "po_number": "PO-2026-0412",
+        "iban": "DE90200411330012345671",
+        "net_eur": "684.00",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "129.96",
+        "gross_eur": "813.96",
+        "lines": [
+          {
+            "sku": "FA-DISP",
+            "description": "Dispersionsfarbe 10L",
+            "qty": "25",
+            "unit_price_eur": "22.26",
+            "line_total_eur": "556.50"
+          },
+          {
+            "sku": "FA-PINSEL",
+            "description": "Pinselset",
+            "qty": "15",
+            "unit_price_eur": "8.50",
+            "line_total_eur": "127.50"
+          }
+        ],
+        "store": "HH2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S05",
+        "name": "Farben Albers OHG",
+        "vat_id": "DE556234871",
+        "iban": "DE90200411330012345671",
+        "skonto_pct": "2.0",
+        "skonto_days": 8,
+        "net_days": 30
+      },
+      "findings": [
+        {
+          "rule_id": "PRICE_DEVIATION",
+          "severity": "warning",
+          "message": "Unit price above PO price by more than tolerance (1.0%): FA-DISP: 22,26 EUR vs PO 21,00 EUR (6.00%)",
+          "route_to": "Einkauf (Category Buyer)",
+          "suggested_action": "Request a credit note for the price difference (supplier likely used an outdated price list).",
+          "amount_impact_eur": "31.50",
+          "hold": false,
+          "details": {
+            "lines": [
+              {
+                "sku": "FA-DISP",
+                "qty": "25",
+                "invoiced_price": "22.26",
+                "po_price": "21.00",
+                "deviation_pct": "6.00"
+              }
+            ]
+          }
+        }
+      ],
+      "decision": "EXCEPTION",
+      "route_to": "Einkauf (Category Buyer)",
+      "payable_eur": "776.48",
+      "skonto_eur": "15.53",
+      "skonto_deadline": "2026-09-23",
+      "pay_by": "2026-09-23",
+      "processing_path": "manual"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-13-s02.txt",
+        "supplier_vat_id": "DE229517634",
+        "invoice_number": "RE-2026-6013",
+        "invoice_date": "2026-09-18",
+        "po_number": "PO-2026-0413",
+        "iban": "DE34600501010023456789",
+        "net_eur": "422.25",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "80.23",
+        "gross_eur": "502.48",
+        "lines": [
+          {
+            "sku": "WK-HANDSCH",
+            "description": "Gartenhandschuhe Set",
+            "qty": "40",
+            "unit_price_eur": "6.90",
+            "line_total_eur": "276.00"
+          },
+          {
+            "sku": "WK-SCHERE",
+            "description": "Gartenschere",
+            "qty": "15",
+            "unit_price_eur": "9.75",
+            "line_total_eur": "146.25"
+          }
+        ],
+        "store": "KI2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S02",
+        "name": "Werkzeug Kraemer KG",
+        "vat_id": "DE229517634",
+        "iban": "DE34600501010023456789",
+        "skonto_pct": "3.0",
+        "skonto_days": 14,
+        "net_days": 45
+      },
+      "findings": [
+        {
+          "rule_id": "QTY_SHORT",
+          "severity": "warning",
+          "message": "Short delivery (Mindermenge): WK-HANDSCH: invoiced 40, received 32 (short 8)",
+          "route_to": "Filiale / Wareneingang",
+          "suggested_action": "Confirm the count with the store and request a credit note for the missing units.",
+          "amount_impact_eur": "55.20",
+          "hold": false,
+          "details": {
+            "lines": [
+              {
+                "sku": "WK-HANDSCH",
+                "invoiced_qty": "40",
+                "received_qty": "32",
+                "shortfall": "8",
+                "unit_price": "6.90"
+              }
+            ]
+          }
+        }
+      ],
+      "decision": "EXCEPTION",
+      "route_to": "Filiale / Wareneingang",
+      "payable_eur": "436.79",
+      "skonto_eur": "13.10",
+      "skonto_deadline": "2026-10-02",
+      "pay_by": "2026-10-02",
+      "processing_path": "manual"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-14-s01.txt",
+        "supplier_vat_id": "DE118743205",
+        "invoice_number": "RE-2026-6014",
+        "invoice_date": "2026-09-14",
+        "po_number": "PO-2026-0414",
+        "iban": "DE12500105170648512345",
+        "net_eur": "390.50",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "74.20",
+        "gross_eur": "464.70",
+        "lines": [
+          {
+            "sku": "GN-TOPF30",
+            "description": "Pflanzkuebel 30cm",
+            "qty": "25",
+            "unit_price_eur": "8.90",
+            "line_total_eur": "222.50"
+          },
+          {
+            "sku": "GN-MULCH",
+            "description": "Rindenmulch 60L",
+            "qty": "30",
+            "unit_price_eur": "5.60",
+            "line_total_eur": "168.00"
+          }
+        ],
+        "store": "LU2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S01",
+        "name": "Gartenbedarf Nord GmbH",
+        "vat_id": "DE118743205",
+        "iban": "DE12500105170648512345",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [
+        {
+          "rule_id": "GR_NOT_POSTED",
+          "severity": "warning",
+          "message": "No goods receipt has been posted yet for PO PO-2026-0414. Skonto deadline 24.09.2026 (in 1 day) - 9,29 EUR discount at risk if the goods receipt is not posted by then.",
+          "route_to": "automatische Wiedervorlage",
+          "suggested_action": "Automatic re-check on next run once the goods receipt is posted (automatische Wiedervorlage).",
+          "amount_impact_eur": "0.00",
+          "hold": true,
+          "details": {
+            "po_number": "PO-2026-0414",
+            "skonto_deadline": "2026-09-24",
+            "skonto_eur": "9.29",
+            "days_left": 1
+          }
+        }
+      ],
+      "decision": "HOLD",
+      "route_to": "automatische Wiedervorlage",
+      "payable_eur": "464.70",
+      "skonto_eur": "9.29",
+      "skonto_deadline": "2026-09-24",
+      "pay_by": "2026-09-24",
+      "processing_path": "auto"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-15-s03.txt",
+        "supplier_vat_id": "DE334892176",
+        "invoice_number": "RE-2026-3301",
+        "invoice_date": "2026-09-14",
+        "po_number": "PO-2026-0415",
+        "iban": "DE56700202700123456780",
+        "net_eur": "210.00",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "39.90",
+        "gross_eur": "249.90",
+        "lines": [
+          {
+            "sku": "HP-SCHRAUBEN",
+            "description": "Terrassenschrauben Edelstahl",
+            "qty": "40",
+            "unit_price_eur": "2.15",
+            "line_total_eur": "86.00"
+          },
+          {
+            "sku": "HP-PFOSTEN",
+            "description": "Holzpfosten 9x9",
+            "qty": "10",
+            "unit_price_eur": "12.40",
+            "line_total_eur": "124.00"
+          }
+        ],
+        "store": "ITZ2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S03",
+        "name": "Holzland Petersen GmbH",
+        "vat_id": "DE334892176",
+        "iban": "DE56700202700123456780",
+        "skonto_pct": "2.0",
+        "skonto_days": 10,
+        "net_days": 30
+      },
+      "findings": [
+        {
+          "rule_id": "DUPLICATE_EXACT",
+          "severity": "critical",
+          "message": "Invoice RE-2026-3301 was already paid on 2026-08-30 (gross 249,90 EUR).",
+          "route_to": "Kreditorenbuchhaltung",
+          "suggested_action": "Do not pay. Inform the supplier this invoice was already settled on 2026-08-30.",
+          "amount_impact_eur": "249.90",
+          "hold": false,
+          "details": {
+            "paid_date": "2026-08-30",
+            "gross_eur": "249.90"
+          }
+        }
+      ],
+      "decision": "BLOCKED",
+      "route_to": "Kreditorenbuchhaltung",
+      "payable_eur": "0.00",
+      "skonto_eur": "0.00",
+      "skonto_deadline": null,
+      "pay_by": null,
+      "processing_path": "manual"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-16-s04.txt",
+        "supplier_vat_id": "DE445123987",
+        "invoice_number": "RE-2026-6016",
+        "invoice_date": "2026-09-16",
+        "po_number": "PO-2026-0416",
+        "iban": "DE55100110012098765432",
+        "net_eur": "365.00",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "69.35",
+        "gross_eur": "434.35",
+        "lines": [
+          {
+            "sku": "LE-SOLAR",
+            "description": "Solarleuchte",
+            "qty": "20",
+            "unit_price_eur": "11.20",
+            "line_total_eur": "224.00"
+          },
+          {
+            "sku": "LE-TIMER",
+            "description": "Zeitschaltuhr",
+            "qty": "15",
+            "unit_price_eur": "9.40",
+            "line_total_eur": "141.00"
+          }
+        ],
+        "store": "REN2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S04",
+        "name": "Lichtwerk Elektro GmbH",
+        "vat_id": "DE445123987",
+        "iban": "DE78500400005012345678",
+        "skonto_pct": "0.0",
+        "skonto_days": 0,
+        "net_days": 30
+      },
+      "findings": [
+        {
+          "rule_id": "IBAN_MISMATCH",
+          "severity": "critical",
+          "message": "Invoice IBAN DE55100110012098765432 differs from supplier master data (DE78500400005012345678).",
+          "route_to": "Finance Lead (Vier-Augen-Prinzip)",
+          "suggested_action": "Verify the bank-detail change by phone using the number on file in the supplier master data - never the contact details printed on the invoice itself.",
+          "amount_impact_eur": "434.35",
+          "hold": false,
+          "details": {}
+        }
+      ],
+      "decision": "BLOCKED",
+      "route_to": "Finance Lead (Vier-Augen-Prinzip)",
+      "payable_eur": "0.00",
+      "skonto_eur": "0.00",
+      "skonto_deadline": null,
+      "pay_by": null,
+      "processing_path": "manual"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-17-s02.txt",
+        "supplier_vat_id": "DE229517634",
+        "invoice_number": "RE-2026-6017",
+        "invoice_date": "2026-09-21",
+        "po_number": "PO-2026-0499",
+        "iban": "DE34600501010023456789",
+        "net_eur": "246.50",
+        "vat_rate_pct": "19",
+        "vat_amount_eur": "46.84",
+        "gross_eur": "293.34",
+        "lines": [
+          {
+            "sku": "WK-SPAT",
+            "description": "Spaten",
+            "qty": "10",
+            "unit_price_eur": "14.90",
+            "line_total_eur": "149.00"
+          },
+          {
+            "sku": "WK-SCHERE",
+            "description": "Gartenschere",
+            "qty": "10",
+            "unit_price_eur": "9.75",
+            "line_total_eur": "97.50"
+          }
+        ],
+        "store": "NMS2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S02",
+        "name": "Werkzeug Kraemer KG",
+        "vat_id": "DE229517634",
+        "iban": "DE34600501010023456789",
+        "skonto_pct": "3.0",
+        "skonto_days": 14,
+        "net_days": 45
+      },
+      "findings": [
+        {
+          "rule_id": "PO_UNKNOWN",
+          "severity": "warning",
+          "message": "Purchase order reference 'PO-2026-0499' is missing or unknown to the ERP.",
+          "route_to": "Kreditorenbuchhaltung",
+          "suggested_action": "Identify the requester/store that ordered without a PO (Maverick Buying) before paying.",
+          "amount_impact_eur": "0.00",
+          "hold": false,
+          "details": {
+            "po_ref": "PO-2026-0499"
+          }
+        }
+      ],
+      "decision": "EXCEPTION",
+      "route_to": "Kreditorenbuchhaltung",
+      "payable_eur": "293.34",
+      "skonto_eur": "8.80",
+      "skonto_deadline": "2026-10-05",
+      "pay_by": "2026-10-05",
+      "processing_path": "manual"
+    },
+    {
+      "invoice": {
+        "source_file": "inv-18-s06.txt",
+        "supplier_vat_id": "DE667345912",
+        "invoice_number": "RE-2026-6018",
+        "invoice_date": "2026-09-20",
+        "po_number": "PO-2026-0418",
+        "iban": "DE23300606010923456712",
+        "net_eur": "382.00",
+        "vat_rate_pct": "7",
+        "vat_amount_eur": "26.74",
+        "gross_eur": "408.74",
+        "lines": [
+          {
+            "sku": "PM-LAVENDEL",
+            "description": "Lavendel 3L Topf",
+            "qty": "40",
+            "unit_price_eur": "4.60",
+            "line_total_eur": "184.00"
+          },
+          {
+            "sku": "PM-HORT",
+            "description": "Hortensie",
+            "qty": "20",
+            "unit_price_eur": "9.40",
+            "line_total_eur": "188.00"
+          }
+        ],
+        "store": "BSG2",
+        "extraction_source": "heuristic",
+        "extraction_note": ""
+      },
+      "supplier": {
+        "supplier_id": "S06",
+        "name": "Pflanzenhof Meyer e.K.",
+        "vat_id": "DE667345912",
+        "iban": "DE23300606010923456712",
+        "skonto_pct": "1.5",
+        "skonto_days": 10,
+        "net_days": 21
+      },
+      "findings": [
+        {
+          "rule_id": "ARITHMETIC_MISMATCH",
+          "severity": "warning",
+          "message": "Invoice arithmetic does not reconcile: line totals sum to 372,00 EUR but the stated Nettobetrag is 382,00 EUR (off by 10,00 EUR).",
+          "route_to": "Kreditorenbuchhaltung",
+          "suggested_action": "Request a corrected invoice from the supplier.",
+          "amount_impact_eur": "10.00",
+          "hold": false,
+          "details": {
+            "line_sum": "372.00",
+            "stated_net": "382.00",
+            "net_diff": "10.00",
+            "expected_gross": "408.74",
+            "stated_gross": "408.74",
+            "gross_diff": "0.00"
+          }
+        }
+      ],
+      "decision": "EXCEPTION",
+      "route_to": "Kreditorenbuchhaltung",
+      "payable_eur": "398.04",
+      "skonto_eur": "5.97",
+      "skonto_deadline": "2026-09-30",
+      "pay_by": "2026-09-30",
+      "processing_path": "manual"
+    }
+  ]
+}
