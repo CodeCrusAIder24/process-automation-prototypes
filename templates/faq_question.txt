@@ -1,0 +1,13 @@
+# Kategorie: faq_question (allgemeine Fragen, z.B. Öffnungszeiten, Servicegebiet)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id},
+#   {opening_hours}, {opening_hours_sentence},
+#   {service_area}, {service_area_sentence}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihre Anfrage. Unsere Öffnungszeiten: {opening_hours_sentence} {service_area_sentence}
+
+Bei weiteren Fragen sind wir gerne für Sie da.
+
+{signoff}

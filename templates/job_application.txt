@@ -1,0 +1,9 @@
+# Kategorie: job_application (Bewerbungen)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihre Bewerbung und das damit verbundene Interesse an Nordlicht Solar. Wir haben Ihre Unterlagen an unsere Personalabteilung weitergeleitet und melden uns zeitnah bei Ihnen.
+
+{signoff}

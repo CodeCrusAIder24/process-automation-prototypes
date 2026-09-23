@@ -1,0 +1,9 @@
+# Kategorie: meeting_request (Terminvorschläge von Kunden/Partnern)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihren Terminvorschlag. Wir leiten diesen an die zuständige Projektleitung weiter, die sich zeitnah bei Ihnen meldet.
+
+{signoff}

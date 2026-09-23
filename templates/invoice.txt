@@ -1,0 +1,9 @@
+# Kategorie: invoice (eingehende Lieferantenrechnungen)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für die Übersendung der Rechnung. Sie wurde an unsere Buchhaltung weitergeleitet und wird dort geprüft.
+
+{signoff}

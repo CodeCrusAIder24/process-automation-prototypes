@@ -1,0 +1,6 @@
+# Gemeinsame Schlussformel, verwendet als {signoff} in allen Antwortvorlagen.
+# Kein weiterer Platzhalter in dieser Datei - reiner Text, keine Fakten.
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team

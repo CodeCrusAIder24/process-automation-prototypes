@@ -1,0 +1,11 @@
+# Kategorie: internal_info_request (Anfragen zu internen Kalkulationen,
+#   Einkaufspreisen oder laufenden internen Projekten)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id}
+# Diese Vorlage lehnt die Anfrage ab, ohne interne Informationen preiszugeben.
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihre Nachricht. Zu internen Kalkulationen, Einkaufspreisen oder laufenden internen Projekten können wir grundsätzlich keine Auskunft erteilen. Für öffentliche Informationen zu unseren Produkten und Leistungen stehen wir Ihnen gerne zur Verfügung.
+
+{signoff}

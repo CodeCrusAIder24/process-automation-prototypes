@@ -1,0 +1,5 @@
+# Gemeinsame Grußformel, verwendet als {greeting} in allen Antwortvorlagen.
+# Kein weiterer Platzhalter in dieser Datei - reiner Text, keine Fakten.
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+Sehr geehrte Damen und Herren,

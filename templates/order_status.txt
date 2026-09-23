@@ -1,0 +1,11 @@
+# Kategorie: order_status (Fragen zum aktuellen Status einer Bestellung)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id}
+# Verwendet keine Fakten aus public_faq.md; der ERP-Abgleich ist im Prototyp
+# ein Stub und muss vor dem Versand manuell geprüft werden.
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihre Nachricht. Wir prüfen den aktuellen Status Ihrer Bestellung und melden uns schnellstmöglich mit einem Update bei Ihnen.
+
+{signoff}

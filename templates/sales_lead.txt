@@ -1,0 +1,11 @@
+# Kategorie: sales_lead (Angebotsanfragen für Photovoltaikanlagen)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id},
+#   {quote_request}, {quote_request_sentence},
+#   {response_time}, {response_time_sentence}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihr Interesse an einer Photovoltaikanlage. {quote_request_sentence} {response_time_sentence}
+
+{signoff}

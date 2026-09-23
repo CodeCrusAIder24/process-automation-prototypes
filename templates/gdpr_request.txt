@@ -1,0 +1,10 @@
+# Kategorie: gdpr_request (Auskunftsersuchen nach Art. 15 DSGVO)
+# Verfügbare Platzhalter: {greeting}, {signoff}, {mail_subject}, {mail_id},
+#   {gdpr_contact}
+# Nur öffentliche Informationen aus knowledge/public_faq.md verwenden.
+
+{greeting}
+
+vielen Dank für Ihr Auskunftsersuchen nach Art. 15 DSGVO. Ihre Anfrage wurde an unser Datenschutzteam ({gdpr_contact}) weitergeleitet. Wir werden Ihnen innerhalb der gesetzlichen Frist von einem Monat antworten.
+
+{signoff}
