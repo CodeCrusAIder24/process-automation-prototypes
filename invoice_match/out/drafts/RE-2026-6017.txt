@@ -1,0 +1,9 @@
+Brandt Haus & Garten GmbH - Kreditorenbuchhaltung
+Speicherstadt 1, 20457 Hamburg
+--------------------------------------------------
+
+Interner Vermerk - keine Weiterleitung an den Lieferanten
+
+Rechnung RE-2026-6017 vom 21.09.2026 von Werkzeug Kraemer KG referenziert die Bestellnummer PO-2026-0499, die im ERP nicht bekannt ist.
+
+Bitte in der Filiale/beim Fachbereich klären, wer diese Bestellung ohne Bestellnummer ausgelöst hat (Maverick Buying), und nachträglich eine Bestellung anlegen bzw. freigeben, bevor die Rechnung bezahlt wird.
