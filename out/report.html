@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mail Triage Agent &middot; Report</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='oklch(22%25 0.016 260)'/%3E%3Crect x='5' y='12' width='11' height='8' rx='1.5' fill='oklch(54%25 0.2 256)'/%3E%3Crect x='17' y='12' width='4' height='8' rx='1.5' fill='oklch(80%25 0.16 85)'/%3E%3Crect x='22' y='12' width='5' height='8' rx='1.5' fill='oklch(52%25 0.2 25)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Hallmark · genre: modern-minimal · macrostructure: Stat-Led · theme: Cobalt · enrichment: none · nav: N9 · footer: Ft2 · tone: technical · anchor hue: 256 · audience: recruiter · use: understand the run in 60 s
+   · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V5 */
+/* Design tokens for the Mail Triage Agent report. triage/report.py inlines this file
+   into the generated out/report.html so the page stays a single self-contained file.
+   Every colour and font in the page references one of these tokens. */
+:root {
+  /* paper and ink, cool-tinted toward the cobalt anchor */
+  --color-paper:          oklch(98.5% 0.004 250);
+  --color-paper-2:        oklch(96.5% 0.006 250);
+  --color-paper-glass:    oklch(98.5% 0.004 250 / 0.88);
+  --color-rule:           oklch(88% 0.012 250);
+  --color-rule-strong:    oklch(78% 0.016 252);
+  --color-ink:            oklch(24% 0.02 258);
+  --color-ink-2:          oklch(34% 0.018 257);
+  --color-muted:          oklch(46% 0.016 255);
+
+  /* the one dark band */
+  --color-graphite:       oklch(22% 0.016 260);
+  --color-graphite-2:     oklch(27% 0.018 260);
+  --color-graphite-rule:  oklch(34% 0.02 260);
+  --color-graphite-ink:   oklch(95% 0.008 250);
+  --color-graphite-muted: oklch(74% 0.014 252);
+
+  /* the single signal accent */
+  --color-accent:         oklch(54% 0.20 256);
+  --color-accent-ink:     oklch(99% 0.004 250);
+  --color-accent-soft:    oklch(86% 0.08 256);
+  --color-accent-on-dark: oklch(78% 0.13 256);
+  --color-focus:          oklch(54% 0.20 256);
+
+  /* data-status tokens: decision families and risk levels. Semantic, never decorative. */
+  --color-status-auto:        oklch(54% 0.20 256);
+  --color-status-draft:       oklch(80% 0.16 85);
+  --color-status-human:       oklch(70% 0.16 45);
+  --color-status-quarantine:  oklch(48% 0.20 25);
+  --color-status-good:        oklch(60% 0.17 145);
+  --color-neutral-fill:       oklch(72% 0.012 252);
+
+  /* type */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body:    "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Cascadia Mono", ui-monospace, monospace;
+
+  --text-xs:   0.75rem;    /* 12px, mono labels only */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-md:   1.25rem;    /* 20px */
+  --text-lg:   1.5625rem;  /* 25px */
+  --text-xl:   1.953rem;   /* 31px */
+  --text-2xl:  2.441rem;   /* 39px */
+  --text-display-s: clamp(2rem, 2.2vw + 1.1rem, 3rem);
+  --text-figure:    clamp(6rem, 13vw, 11rem);
+
+  /* 4-point spacing scale */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  /* shape and depth */
+  --radius-control: 6px;
+  --radius-card:    10px;
+  --shadow-whisper: 0 1px 2px oklch(24% 0.02 258 / 0.05);
+
+  /* layers */
+  --z-base: 1;
+  --z-sticky-nav: 300;
+  --banner-height: 56px;
+}
+
+
+  html, body { overflow-x: clip; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--banner-height) + var(--space-md)); scrollbar-color: var(--color-rule-strong) var(--color-paper); }
+  body {
+    margin: 0; background: var(--color-paper); color: var(--color-ink-2);
+    font-family: var(--font-body); font-weight: 400; font-size: var(--text-base); line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 2px; }
+  a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-rule-strong); text-decoration-thickness: 1px; text-underline-offset: 3px;
+      transition: text-decoration-color var(--dur-micro) var(--ease-out); }
+  a:hover { text-decoration-color: var(--color-accent); }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 600; color: var(--color-ink); letter-spacing: -0.025em; text-wrap: balance; overflow-wrap: anywhere; min-width: 0; }
+  h1 { font-size: var(--text-display-s); line-height: 1.08; }
+  h2 { font-size: var(--text-xl); line-height: 1.15; }
+  h3 { font-size: var(--text-md); line-height: 1.25; }
+  p { margin: 0; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--space-lg); }
+  .mono { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .sub { color: var(--color-muted); font-size: var(--text-sm); margin-top: var(--space-3xs); }
+  .note { color: var(--color-muted); font-size: var(--text-sm); max-width: 62ch; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  code { font-family: var(--font-mono); font-size: var(--text-xs); }
+
+  /* N9 · edge-aligned nav, hairline, one sticky element on the page */
+  .nav { position: sticky; top: 0; z-index: var(--z-sticky-nav); height: var(--banner-height); background: var(--color-paper-glass); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-rule); }
+  .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); }
+  .nav__left { display: flex; align-items: center; gap: var(--space-lg); min-width: 0; }
+  .wordmark { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); letter-spacing: -0.02em; color: var(--color-ink); text-decoration: none; white-space: nowrap; line-height: 1; }
+  .nav__meta { color: var(--color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1; text-transform: none; letter-spacing: 0.02em; }
+  .nav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-lg); }
+  .nav__links a { color: var(--color-ink-2); text-decoration: none; white-space: nowrap; line-height: 1; padding: var(--space-xs) 0; position: relative; }
+  .nav__links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-short) var(--ease-out); }
+  .nav__links a:hover::after, .nav__links a:focus-visible::after { transform: scaleX(1); }
+
+  /* H4 · stat-led hero: figure left, words right, data-viz below */
+  .hero { padding: var(--space-xl) 0 var(--space-3xl); }
+  .hero__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: var(--space-xl) var(--space-2xl); align-items: end; }
+  .figure__label { color: var(--color-muted); margin: 0 0 var(--space-sm); }
+  .figure { font-family: var(--font-display); font-weight: 500; font-size: var(--text-figure); line-height: 0.85; letter-spacing: -0.05em; color: var(--color-ink); margin: 0 0 var(--space-md) -0.04em; }
+  .figure__sign { font-weight: 500; }
+  .figure__unit { font-size: 0.45em; font-weight: 500; letter-spacing: -0.02em; margin-left: 0.05em; }
+  .hero__lede { font-size: var(--text-md); line-height: 1.45; color: var(--color-ink-2); max-width: 48ch; }
+  .hero__lede strong { color: var(--color-ink); font-weight: 600; }
+  .chip { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 0 var(--space-md); height: 2.5rem; border: 1px solid var(--color-rule-strong); border-radius: var(--radius-control);
+          background: var(--color-paper); color: var(--color-ink); font-size: var(--text-sm); font-weight: 500; text-decoration: none; white-space: nowrap; line-height: 1; cursor: pointer;
+          transition: border-color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+  .chip:hover { border-color: var(--color-accent); }
+  .chip:active { transform: translateY(1px); }
+  .chip:disabled, .chip[aria-disabled="true"], .filter-input:disabled ~ .filters label { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+  .chip--cta { margin-top: var(--space-lg); color: var(--color-accent); border-color: var(--color-accent); }
+  .chip--cta:hover { background: var(--color-accent); color: var(--color-accent-ink); }
+  .chip--cta::after { content: "\2192"; }
+
+  .flow { display: flex; gap: 2px; height: 40px; margin-top: var(--space-2xl); border-radius: var(--radius-control); overflow: hidden; }
+  .seg { display: grid; place-items: center; min-width: 2rem; font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); }
+  .seg-auto { background: var(--color-status-auto); color: var(--color-accent-ink); }
+  .seg-draft { background: var(--color-status-draft); color: var(--color-ink); }
+  .seg-human { background: var(--color-status-human); color: var(--color-ink); }
+  .seg-quarantine { background: var(--color-status-quarantine); color: var(--color-accent-ink); }
+  .legend { list-style: none; margin: var(--space-sm) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); font-size: var(--text-sm); color: var(--color-muted); }
+  .legend li { display: flex; align-items: center; gap: var(--space-xs); }
+  .legend b { color: var(--color-ink); font-weight: 600; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot-auto { background: var(--color-status-auto); } .dot-draft { background: var(--color-status-draft); }
+  .dot-human { background: var(--color-status-human); } .dot-quarantine { background: var(--color-status-quarantine); }
+
+  /* one orchestrated entrance, hero only, JS-gated so no-JS renders fully */
+  .js .hero .reveal { opacity: 0; transform: translateY(8px); animation: reveal var(--dur-long) var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
+  @keyframes reveal { to { opacity: 1; transform: none; } }
+
+  /* T4 · numbered stat strip */
+  .stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--color-rule); border-bottom: 1px solid var(--color-rule); counter-reset: stat; }
+  .stats li { padding: var(--space-lg) var(--space-lg) var(--space-lg) 0; display: grid; gap: var(--space-2xs); }
+  .stats li + li { padding-left: var(--space-lg); border-left: 1px solid var(--color-rule); }
+  .stat__value { font-family: var(--font-display); font-weight: 600; font-size: var(--text-2xl); line-height: 1; letter-spacing: -0.03em; color: var(--color-ink); }
+  .stat__label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; color: var(--color-ink-2); margin-top: var(--space-xs); }
+  .stat__note { color: var(--color-muted); font-size: var(--text-sm); }
+
+  /* sections */
+  section.block { padding: var(--space-3xl) 0 0; }
+  .block__head { display: grid; grid-template-columns: 1fr; gap: var(--space-xs); max-width: 62ch; }
+  .block__head p { color: var(--color-ink-2); }
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2xl); margin-top: var(--space-xl); }
+  .two-col h3 { margin-bottom: var(--space-md); }
+
+  .bars { display: grid; gap: var(--space-sm); }
+  .bar-row { display: grid; grid-template-columns: 11rem minmax(0, 1fr) 7.5rem; align-items: center; gap: var(--space-md); }
+  .bar-label { font-size: var(--text-sm); color: var(--color-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-label em { font-style: normal; color: var(--color-accent); margin-left: var(--space-xs); }
+  .is-current .bar-label { color: var(--color-ink); font-weight: 600; }
+  .bar-track { height: 22px; box-shadow: inset 1px 0 0 var(--color-rule-strong); }
+  .bar-fill { height: 100%; width: var(--w); border-radius: 0 3px 3px 0; transition: filter var(--dur-micro) var(--ease-out); }
+  .bar-fill:hover { filter: brightness(0.94); }
+  .fill-neutral { background: var(--color-neutral-fill); }
+  .fill-accent { background: var(--color-accent); }
+  .fill-soft { background: var(--color-accent-soft); }
+  .bar-value { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); white-space: nowrap; line-height: 1.2; }
+  .bar-value .sub { display: block; font-family: var(--font-body); font-weight: 400; }
+  .bars + .note { margin-top: var(--space-lg); }
+
+  /* threats */
+  .threats { list-style: none; margin: var(--space-xl) 0 0; padding: 0; border-top: 1px solid var(--color-rule); }
+  .threat { padding: var(--space-md) 0; border-bottom: 1px solid var(--color-rule); display: grid; gap: var(--space-2xs); }
+  .threat-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-md); }
+  .mail-id { color: var(--color-muted); }
+  .threat-subject { font-weight: 600; color: var(--color-ink); }
+  .threat-from { color: var(--color-muted); font-size: var(--text-sm); }
+  .chips { list-style: none; margin: var(--space-xs) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  .chips li { display: inline-flex; align-items: baseline; gap: var(--space-xs); border: 1px solid var(--color-rule); border-radius: var(--radius-control); padding: var(--space-2xs) var(--space-sm); font-size: var(--text-sm); line-height: 1.4; color: var(--color-ink-2); max-width: 100%; }
+  .chips code { color: var(--color-status-quarantine); font-weight: 500; letter-spacing: 0.04em; white-space: nowrap; flex: none; }
+
+  /* the one graphite band · F4 step sequence */
+  .band { margin-top: var(--space-3xl); padding: var(--space-3xl) 0; background: var(--color-graphite); color: var(--color-graphite-ink); }
+  .band h2, .band h3 { color: var(--color-graphite-ink); }
+  .band .block__head p { color: var(--color-graphite-muted); }
+  .steps { list-style: none; margin: var(--space-xl) 0 0; padding: 0; border-top: 1px solid var(--color-graphite-rule); }
+  .step { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-md) var(--space-2xl); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-graphite-rule); }
+  .stage { display: block; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; color: var(--color-accent-on-dark); margin-bottom: var(--space-xs); }
+  .step p { color: var(--color-graphite-muted); max-width: 52ch; }
+  .step p em { font-style: normal; color: var(--color-graphite-ink); font-weight: 500; }
+
+  /* decisions table + CSS-only filter (radios in normal flow, zero size) */
+  .filter-input { display: block; width: 0; height: 0; margin: 0; padding: 0; border: 0; opacity: 0; appearance: none; }
+  .filters { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xl); }
+  .filters .chip { height: 2.25rem; color: var(--color-ink-2); }
+  .filters .chip b { color: var(--color-ink); }
+  #f-all:checked ~ .filters label[for="f-all"], #f-auto:checked ~ .filters label[for="f-auto"], #f-draft:checked ~ .filters label[for="f-draft"], #f-human:checked ~ .filters label[for="f-human"], #f-quarantine:checked ~ .filters label[for="f-quarantine"] { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+  #f-all:checked ~ .filters label[for="f-all"] b, #f-auto:checked ~ .filters label[for="f-auto"] b, #f-draft:checked ~ .filters label[for="f-draft"] b, #f-human:checked ~ .filters label[for="f-human"] b, #f-quarantine:checked ~ .filters label[for="f-quarantine"] b { color: var(--color-paper); }
+  #f-all:focus-visible ~ .filters label[for="f-all"], #f-auto:focus-visible ~ .filters label[for="f-auto"], #f-draft:focus-visible ~ .filters label[for="f-draft"], #f-human:focus-visible ~ .filters label[for="f-human"], #f-quarantine:focus-visible ~ .filters label[for="f-quarantine"] { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  #f-auto:checked ~ .table-scroll tr:not(.fam-auto) { display: none; }
+  #f-draft:checked ~ .table-scroll tr:not(.fam-draft) { display: none; }
+  #f-human:checked ~ .table-scroll tr:not(.fam-human) { display: none; }
+  #f-quarantine:checked ~ .table-scroll tr:not(.fam-quarantine) { display: none; }
+  .table-scroll { margin-top: var(--space-md); overflow-x: auto; border-top: 1px solid var(--color-rule); }
+  table { border-collapse: collapse; width: 100%; min-width: 56rem; }
+  thead th { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; color: var(--color-muted); padding: var(--space-sm) var(--space-md) var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); }
+  tbody td { padding: var(--space-md) var(--space-md) var(--space-md) 0; border-bottom: 1px solid var(--color-rule); vertical-align: top; font-size: var(--text-sm); }
+  tbody tr:hover td { background: var(--color-paper-2); }
+  .col-mail { width: 26%; } .col-cat { width: 12%; } .col-risk { width: 9%; white-space: nowrap; } .col-decision { width: 17%; }
+  .subject { font-weight: 600; color: var(--color-ink); margin-top: var(--space-3xs); }
+  .from { color: var(--color-muted); font-size: var(--text-sm); margin-top: var(--space-3xs); }
+  .col-risk .dot { margin-right: var(--space-xs); }
+  .risk-none { background: var(--color-status-good); } .risk-low { background: var(--color-status-draft); } .risk-medium { background: var(--color-status-human); } .risk-high { background: var(--color-status-quarantine); }
+  .badge { display: inline-flex; align-items: center; gap: var(--space-xs); font-weight: 600; color: var(--color-ink); white-space: nowrap; }
+  ul.reasons { margin: 0; padding-left: var(--space-md); color: var(--color-ink-2); }
+  ul.reasons li + li { margin-top: var(--space-3xs); }
+  .deadline { color: var(--color-ink); font-weight: 600; }
+  details { margin-top: var(--space-xs); }
+  details.more { margin-top: var(--space-2xs); } details.more summary { color: var(--color-muted); font-weight: 400; }
+  summary { cursor: pointer; font-size: var(--text-sm); color: var(--color-accent); font-weight: 500; }
+  pre.draft { white-space: pre-wrap; font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.5; color: var(--color-ink-2); background: var(--color-paper-2); border: 1px solid var(--color-rule); border-radius: var(--radius-control); padding: var(--space-sm) var(--space-md); margin: var(--space-xs) 0 0; }
+
+  /* F3 · spec sheet for the assumptions */
+  .spec-sheet { width: 100%; border-collapse: collapse; margin-top: var(--space-xl); border-top: 1px solid var(--color-rule); }
+  .spec-sheet th, .spec-sheet td { padding: var(--space-sm) var(--space-md) var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: top; font-size: var(--text-sm); }
+  .spec-sheet th { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); white-space: nowrap; width: 6rem; font-size: var(--text-base); }
+  .spec-sheet td { color: var(--color-ink); }
+  .spec-sheet .spec__note { color: var(--color-muted); }
+  .spec-sheet + .note { margin-top: var(--space-md); }
+
+  .closing { margin-top: var(--space-3xl); max-width: 62ch; }
+  .closing p { font-size: var(--text-md); line-height: 1.45; color: var(--color-ink); }
+  .closing p + p { margin-top: var(--space-sm); font-size: var(--text-base); color: var(--color-ink-2); }
+
+  /* Ft2 · single line */
+  .foot-line { margin-top: var(--space-3xl); padding: var(--space-lg) 0 var(--space-2xl); border-top: 1px solid var(--color-rule); color: var(--color-muted); font-size: var(--text-sm); }
+  .foot-line .wrap { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); }
+  .foot-line span + span::before { content: "\00b7"; margin-right: var(--space-md); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .hero .reveal { animation: reveal 150ms linear forwards; transform: none; }
+    * { transition-duration: 1ms !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 48rem) {
+    .nav__links, .nav__meta { display: none; }
+    .hero { padding: var(--space-xl) 0 var(--space-2xl); }
+    .hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+    .figure { font-size: clamp(5rem, 22vw, 7rem); }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stats li { padding: var(--space-md) var(--space-md) var(--space-md) 0; }
+    .stats li + li { padding-left: var(--space-md); }
+    .stats li:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-rule); }
+    .stats li:nth-child(4) { border-top: 1px solid var(--color-rule); }
+    section.block { padding-top: var(--space-2xl); }
+    .two-col { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+    .bar-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
+    .bar-value .sub { display: inline; margin-left: var(--space-xs); }
+    .step { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
+    .band { padding: var(--space-2xl) 0; }
+    .flow { height: 36px; }
+    .spec-sheet th { width: auto; }
+  }
+  @media print {
+    .nav, .filters { display: none; }
+    .table-scroll { overflow: visible; } table { min-width: 0; }
+    .band { print-color-adjust: exact; }
+    details { display: block; } details > summary { display: none; } details > pre, details > ul { display: block; }
+  }
+</style>
+</head>
+<body>
+<header class="nav" role="banner">
+  <div class="wrap">
+    <div class="nav__left">
+      <a class="wordmark" href="#top">Mail Triage Agent</a>
+      <p class="nav__meta mono">Stufe 1 &middot; Assistieren &middot; Heuristik (offline)</p>
+    </div>
+    <nav aria-label="Abschnitte">
+      <ul class="nav__links mono">
+        <li><a href="#nutzen">Nutzen</a></li>
+        <li><a href="#abwehr">Abwehr</a></li>
+        <li><a href="#funktionsweise">Funktionsweise</a></li>
+        <li><a href="#entscheidungen">Entscheidungen</a></li>
+        <li><a href="#annahmen">Annahmen</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__grid">
+        <div class="hero__lead">
+          <p class="figure__label mono reveal" style="--i:0">geschätzt &middot; Autonomiestufe 1 &middot; 16 Mails</p>
+          <p class="figure tnum reveal" style="--i:0" aria-label="minus 61 Prozent"><span class="figure__sign">&minus;</span><span data-count="61">61</span><span class="figure__unit">&nbsp;%</span></p>
+          <h1 class="reveal" style="--i:1">weniger Bearbeitungszeit im Posteingang, bei gleicher Sicherheit.</h1>
+        </div>
+        <div class="hero__aside reveal" style="--i:2">
+          <p class="hero__lede">
+            <strong>16 eingehende Mails</strong> für Nordlicht Solar geprüft, klassifiziert und entschieden.
+            <strong>7 Mails</strong> ohne menschlichen Eingriff erledigt, <strong>4 Angriffe gestoppt</strong>,
+            darunter 2 Prompt-Injection-Versuche. Von 63,5 auf 24,5&nbsp;Minuten
+            Bearbeitungszeit, hochgerechnet 68&nbsp;Stunden pro Monat.
+          </p>
+          <a class="chip chip--cta" href="#entscheidungen">Alle 16 Entscheidungen ansehen</a>
+        </div>
+      </div>
+      <div class="reveal" style="--i:3"><div class="flow" role="img" aria-label="Verteilung der 16 Mails: 7 Automatisch erledigt, 2 Entwurf zur Prüfung, 3 An Mensch eskaliert, 4 Quarantäne."><div class="seg seg-auto" style="flex-basis:43.75%" title="Automatisch erledigt: 7 von 16 Mails"><span class="tnum">7</span></div><div class="seg seg-draft" style="flex-basis:12.50%" title="Entwurf zur Prüfung: 2 von 16 Mails"><span class="tnum">2</span></div><div class="seg seg-human" style="flex-basis:18.75%" title="An Mensch eskaliert: 3 von 16 Mails"><span class="tnum">3</span></div><div class="seg seg-quarantine" style="flex-basis:25.00%" title="Quarantäne: 4 von 16 Mails"><span class="tnum">4</span></div></div><ul class="legend"><li><i class="dot dot-auto"></i>Automatisch erledigt<b class="tnum">7</b></li><li><i class="dot dot-draft"></i>Entwurf zur Prüfung<b class="tnum">2</b></li><li><i class="dot dot-human"></i>An Mensch eskaliert<b class="tnum">3</b></li><li><i class="dot dot-quarantine"></i>Quarantäne<b class="tnum">4</b></li></ul></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <ol class="stats"><li><span class="stat__value tnum">68&nbsp;h</span><span class="stat__label">pro Monat gespart</span><span class="stat__note">geschätzt, bei 80 Mails am Tag</span></li><li><span class="stat__value tnum">7</span><span class="stat__label">automatisch erledigt</span><span class="stat__note">44&nbsp;% des Posteingangs</span></li><li><span class="stat__value tnum">4</span><span class="stat__label">Angriffe gestoppt</span><span class="stat__note">davon 2 Prompt-Injections</span></li><li><span class="stat__value tnum">16</span><span class="stat__label">Mails geprüft</span><span class="stat__note">63,5 auf 24,5&nbsp;min</span></li></ol>
+  </div>
+
+  <section class="block" id="nutzen">
+    <div class="wrap">
+      <div class="block__head">
+        <h2>Was die Automatisierung bringt</h2>
+        <p>Bearbeitungszeit für genau diesen Posteingang, heute gegen morgen. Alle Zeitwerte sind Schätzungen aus den Annahmen in policy.toml.</p>
+      </div>
+      <div class="two-col">
+        <div>
+          <h3>Zeitaufwand für 16 Mails</h3>
+          
+<div class="bars">
+  <div class="bar-row">
+    <div class="bar-label">Heute, manuell</div>
+    <div class="bar-track"><div class="bar-fill fill-neutral" style="--w:100%"></div></div>
+    <div class="bar-value tnum">63,5&nbsp;min</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Mit Triage-Agent</div>
+    <div class="bar-track"><div class="bar-fill fill-accent" style="--w:38.6%"></div></div>
+    <div class="bar-value tnum">24,5&nbsp;min</div>
+  </div>
+</div>
+<p class="note">Geschätzt &asymp; 68&nbsp;Stunden pro Monat bei 80 Mails am Tag
+und 21 Arbeitstagen. <a href="#annahmen">Annahmen ansehen</a></p>
+        </div>
+        <div>
+          <h3>Ersparnis je Autonomiestufe</h3>
+          <div class="bars rampup">
+  <div class="bar-row">
+    <div class="bar-label">Stufe 0 &middot; Beobachten</div>
+    <div class="bar-track"><div class="bar-fill fill-soft" style="--w:46.6%"
+      title="Stufe 0: 34,1 h/Monat, 0,0 % automatisch"></div></div>
+    <div class="bar-value tnum">34&nbsp;h<span class="sub">0&nbsp;% automatisch</span></div>
+  </div>
+  <div class="bar-row is-current">
+    <div class="bar-label">Stufe 1 &middot; Assistieren <em class="mono">aktuell</em></div>
+    <div class="bar-track"><div class="bar-fill fill-accent" style="--w:93.2%"
+      title="Stufe 1: 68,2 h/Monat, 43,8 % automatisch"></div></div>
+    <div class="bar-value tnum">68&nbsp;h<span class="sub">44&nbsp;% automatisch</span></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Stufe 2 &middot; Handeln (risikoarm)</div>
+    <div class="bar-track"><div class="bar-fill fill-soft" style="--w:96.6%"
+      title="Stufe 2: 70,7 h/Monat, 50,0 % automatisch"></div></div>
+    <div class="bar-value tnum">71&nbsp;h<span class="sub">50&nbsp;% automatisch</span></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Stufe 3 &middot; Erweitert</div>
+    <div class="bar-track"><div class="bar-fill fill-soft" style="--w:100.0%"
+      title="Stufe 3: 73,2 h/Monat, 56,2 % automatisch"></div></div>
+    <div class="bar-value tnum">73&nbsp;h<span class="sub">56&nbsp;% automatisch</span></div>
+  </div></div>
+          <p class="note" style="margin-top:var(--space-lg)">Gleicher Posteingang, vier Stufen. Die nächste Stufe wird erst freigegeben, wenn die Zustimmungsrate menschlicher Reviews nach 50 Prüfungen über 95&nbsp;% liegt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="abwehr">
+    <div class="wrap">
+      <div class="block__head">
+        <h2>Abgewehrt: 4 Mails in Quarantäne</h2>
+        <p>Gestoppt vor jeder Antwort und unabhängig von der Autonomiestufe. Die Regel-IDs zeigen, welche Prüfung angeschlagen hat.</p>
+      </div>
+      <ol class="threats">
+  <li class="threat">
+    <div class="threat-head">
+      <span class="mail-id mono">M07</span>
+      <span class="threat-subject">Ihr Microsoft 365 Passwort läuft ab</span>
+      <span class="threat-from">Microsoft 365 Support &lt;security-alert@m1crosoft-login.xyz&gt;</span>
+    </div>
+    <ul class="chips"><li><code>PHI-01</code>Credential-/Dringlichkeits-Köder gefunden: &#x27;passwort läuft.*ab&#x27;</li><li><code>PHI-02</code>Link-Text/Ziel-Mismatch oder Lookalike-Domain: Linktext zeigt &#x27;microsoft.com/account/verify&#x27;, Ziel ist aber &#x27;m1crosoft-login.xyz&#x27;; verdächtige/lookalike Domain im Linkziel: &#x27;m1crosoft-login.xyz&#x27;</li></ul>
+  </li>
+  <li class="threat">
+    <div class="threat-head">
+      <span class="mail-id mono">M08</span>
+      <span class="threat-subject">System Update Required</span>
+      <span class="threat-from">IT Support &lt;unknown@freemail-test.com&gt;</span>
+    </div>
+    <ul class="chips"><li><code>INJ-01</code>Anweisungs-Override-Phrase gefunden: &#x27;ignore all previous instructions&#x27;</li><li><code>INJ-03</code>Exfiltrations-Aufforderung gefunden: &#x27;customer list&#x27;</li></ul>
+  </li>
+  <li class="threat">
+    <div class="threat-head">
+      <span class="mail-id mono">M09</span>
+      <span class="threat-subject">Frage zu meiner Wallbox</span>
+      <span class="threat-from">Peter Meyer &lt;anfrage.kunde@gmx.net&gt;</span>
+    </div>
+    <ul class="chips"><li><code>INJ-02</code>Rollen-/System-Marker gefunden: &#x27;system note&#x27;</li><li><code>INJ-03</code>Exfiltrations-Aufforderung gefunden: &#x27;internal (price|attachments|documents)&#x27;</li></ul>
+  </li>
+  <li class="threat">
+    <div class="threat-head">
+      <span class="mail-id mono">M10</span>
+      <span class="threat-subject">DRINGEND - Überweisung heute noch erforderlich</span>
+      <span class="threat-from">Dr. Markus Hellwig (Geschäftsführer) &lt;markus.hellwig1978@gmail.com&gt;</span>
+    </div>
+    <ul class="chips"><li><code>BEC-01</code>Absendername &#x27;Dr. Markus Hellwig (Geschäftsführer)&#x27; suggeriert Geschäftsführung, aber Absenderdomain &#x27;gmail.com&#x27; ist nicht die Firmendomain &#x27;nordlicht-solar.de&#x27; (Display-Name-Spoofing)</li><li><code>BEC-02</code>Zahlungs-/Bankdatenänderung kombiniert mit Dringlichkeit: &#x27;überweisen sie&#x27; + &#x27;heute noch&#x27;</li></ul>
+  </li></ol>
+    </div>
+  </section>
+
+  <section class="band" id="funktionsweise">
+    <div class="wrap">
+      <div class="block__head">
+        <h2>So funktioniert es</h2>
+        <p>Fünf Schritte je Mail. Die Sicherheitsprüfung kommt vor jeder KI, der Leak-Guard nach jeder Antwort.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><div><span class="stage">1.0</span><h3>Sicherheitsprüfung</h3></div><p>Regelbasiert und deterministisch: Prompt-Injection, Phishing-Links, CEO-Fraud, riskante Anhänge. Ergebnis ist ein Risikoscore mit benannten Befunden.</p></li>
+        <li class="step"><div><span class="stage">2.0</span><h3>Klassifikation</h3></div><p>Im Zielbild ein LLM mit strukturierter JSON-Ausgabe. <em>Dieser Lauf nutzte die regelbasierte Offline-Heuristik.</em> Der Mail-Inhalt gilt in beiden Fällen strikt als Daten, nie als Anweisung.</p></li>
+        <li class="step"><div><span class="stage">3.0</span><h3>Policy-Engine</h3></div><p>Entscheidet nach Autonomiestufe 0 bis 3. Quarantäne, Datenschutz und niedrige Konfidenz überstimmen jede Stufe.</p></li>
+        <li class="step"><div><span class="stage">4.0</span><h3>Leak-Guard</h3></div><p>Jeder Antwortentwurf wird gegen interne Begriffe, IBANs und Schlüssel geprüft, bevor er vorgeschlagen wird. Ein Treffer eskaliert an den Menschen.</p></li>
+        <li class="step"><div><span class="stage">5.0</span><h3>Audit und Feedback</h3></div><p>Jede Entscheidung steht mit Begründung im Audit-Log. Menschliche Reviews steuern, wann die nächste Autonomiestufe freigegeben wird.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="entscheidungen">
+    <div class="wrap">
+      <div class="block__head">
+        <h2>Alle 16 Entscheidungen</h2>
+        <p>Kategorie, Risiko, Entscheidung und Begründung je Mail. Entwürfe wurden vom Leak-Guard freigegeben.</p>
+      </div>
+      <input class="filter-input" type="radio" name="fam" id="f-all" checked><input class="filter-input" type="radio" name="fam" id="f-auto"><input class="filter-input" type="radio" name="fam" id="f-draft"><input class="filter-input" type="radio" name="fam" id="f-human"><input class="filter-input" type="radio" name="fam" id="f-quarantine">
+      <div class="filters" role="group" aria-label="Nach Entscheidung filtern"><label class="chip" for="f-all">Alle<b class="tnum">16</b></label><label class="chip" for="f-auto"><i class="dot dot-auto"></i>Automatisch erledigt<b class="tnum">7</b></label><label class="chip" for="f-draft"><i class="dot dot-draft"></i>Entwurf zur Prüfung<b class="tnum">2</b></label><label class="chip" for="f-human"><i class="dot dot-human"></i>An Mensch eskaliert<b class="tnum">3</b></label><label class="chip" for="f-quarantine"><i class="dot dot-quarantine"></i>Quarantäne<b class="tnum">4</b></label></div>
+      <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Mail</th><th>Kategorie</th><th>Risiko</th><th>Entscheidung</th><th>Begründung</th></tr>
+        </thead>
+        <tbody>
+      <tr class="fam-draft">
+        <td class="col-mail"><span class="mail-id mono">M01</span>
+          <div class="subject">Öffnungszeiten und Servicegebiet</div>
+          <div class="from">Sabine Jansen &middot; familie.jansen@web.de</div></td>
+        <td class="col-cat">FAQ-Frage<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-draft"></i>Entwurf zur Prüfung</span>
+          <div class="sub">Kundenservice</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;faq_question&#x27; -&gt; Entwurf zur menschlichen Freigabe</li><li>Entwurf erstellt (Kategorie: faq_question)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihre Anfrage. Unsere Öffnungszeiten: Montag bis Freitag, 08:00 - 17:00 Uhr. Wir beliefern und installieren in ganz Norddeutschland, unter anderem Hamburg, Bremen, Kiel, Lübeck und das Umland.
+
+Bei weiteren Fragen sind wir gerne für Sie da.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M02</span>
+          <div class="subject">Anfrage Angebot 8 kWp Anlage mit Speicher</div>
+          <div class="from">Thomas Brandt &middot; t.brandt@bruns-autohaus.de</div></td>
+        <td class="col-cat">Vertriebsanfrage<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch weitergeleitet</span>
+          <div class="sub">Vertrieb</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;sales_lead&#x27; -&gt; automatisches Routing an Vertrieb</li><li>Entwurf erstellt (Kategorie: sales_lead)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihr Interesse an einer Photovoltaikanlage. Angebote können über das Kontaktformular auf www.nordlicht-solar.de/angebot oder per E-Mail mit Angabe von Dachfläche, Ausrichtung und gewünschter Leistung angefragt werden. Wir antworten in der Regel innerhalb von 2 Werktagen mit einem unverbindlichen Angebot.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M03</span>
+          <div class="subject">Rechnung 2026-0912</div>
+          <div class="from">SolarTech Großhandel Buchhaltung &middot; buchhaltung@solartech-grosshandel.de</div></td>
+        <td class="col-cat">Rechnung<div class="sub tnum">Konfidenz 70&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch weitergeleitet</span>
+          <div class="sub">Buchhaltung</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;invoice&#x27; -&gt; automatisches Routing an Buchhaltung</li><li>Entwurf erstellt (Kategorie: invoice)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für die Übersendung der Rechnung. Sie wurde an unsere Buchhaltung weitergeleitet und wird dort geprüft.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M04</span>
+          <div class="subject">Terminvorschlag gemeinsames Projekt</div>
+          <div class="from">Jens Hoffmann &middot; j.hoffmann@stadtwerke-luebeck-partner.de</div></td>
+        <td class="col-cat">Terminanfrage<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch weitergeleitet</span>
+          <div class="sub">Projektleitung</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;meeting_request&#x27; -&gt; automatisches Routing an Projektleitung</li><li>Entwurf erstellt (Kategorie: meeting_request)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihren Terminvorschlag. Wir leiten diesen an die zuständige Projektleitung weiter, die sich zeitnah bei Ihnen meldet.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M05</span>
+          <div class="subject">PV Magazin Newsletter KW37: Neue Förderprogramme im Überblick</div>
+          <div class="from">PV Magazin Newsletter &middot; newsletter@pv-magazin.de</div></td>
+        <td class="col-cat">Newsletter<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch archiviert</span>
+          <div class="sub">Archiv</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;newsletter&#x27; mit ausreichender Konfidenz -&gt; automatisches Archivieren</li></ul></td>
+      </tr>
+      <tr class="fam-human">
+        <td class="col-mail"><span class="mail-id mono">M06</span>
+          <div class="subject">Beschwerde: Installation seit Wochen verzögert - das geht so nicht mehr!</div>
+          <div class="from">Klaus Wagner &middot; k.wagner@gmx.de</div></td>
+        <td class="col-cat">Beschwerde<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-human"></i>An Mensch eskaliert</span>
+          <div class="sub">Kundenservice-Eskalation</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;complaint&#x27; erfordert menschliche Entscheidung</li></ul></td>
+      </tr>
+      <tr class="fam-quarantine">
+        <td class="col-mail"><span class="mail-id mono">M07</span>
+          <div class="subject">Ihr Microsoft 365 Passwort läuft ab</div>
+          <div class="from">Microsoft 365 Support &middot; security-alert@m1crosoft-login.xyz</div></td>
+        <td class="col-cat">Spam / Phishing<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-high"></i>hoch<div class="sub tnum">Score 70&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-quarantine"></i>Quarantäne</span>
+          <div class="sub">Security-Quarantäne</div></td>
+        <td class="col-why"><ul class="reasons"><li>Sicherheitsrisiko &#x27;high&#x27; oder Prompt-Injection erkannt</li><li>PHI-01: Credential-/Dringlichkeits-Köder gefunden: &#x27;passwort läuft.*ab&#x27;</li><li>PHI-02: Link-Text/Ziel-Mismatch oder Lookalike-Domain: Linktext zeigt &#x27;microsoft.com/account/verify&#x27;, Ziel ist aber &#x27;m1crosoft-login.xyz&#x27;; verdächtige/lookalike Domain im Linkziel: &#x27;m1crosoft-login.xyz&#x27;</li></ul></td>
+      </tr>
+      <tr class="fam-quarantine">
+        <td class="col-mail"><span class="mail-id mono">M08</span>
+          <div class="subject">System Update Required</div>
+          <div class="from">IT Support &middot; unknown@freemail-test.com</div></td>
+        <td class="col-cat">Spam / Phishing<div class="sub tnum">Konfidenz 97&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-high"></i>hoch<div class="sub tnum">Score 90&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-quarantine"></i>Quarantäne</span>
+          <div class="sub">Security-Quarantäne</div></td>
+        <td class="col-why"><ul class="reasons"><li>Sicherheitsrisiko &#x27;high&#x27; oder Prompt-Injection erkannt</li><li>INJ-01: Anweisungs-Override-Phrase gefunden: &#x27;ignore all previous instructions&#x27;</li><li>INJ-03: Exfiltrations-Aufforderung gefunden: &#x27;customer list&#x27;</li></ul></td>
+      </tr>
+      <tr class="fam-quarantine">
+        <td class="col-mail"><span class="mail-id mono">M09</span>
+          <div class="subject">Frage zu meiner Wallbox</div>
+          <div class="from">Peter Meyer &middot; anfrage.kunde@gmx.net</div></td>
+        <td class="col-cat">Unklar<div class="sub tnum">Konfidenz 35&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-high"></i>hoch<div class="sub tnum">Score 80&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-quarantine"></i>Quarantäne</span>
+          <div class="sub">Security-Quarantäne</div></td>
+        <td class="col-why"><ul class="reasons"><li>Sicherheitsrisiko &#x27;high&#x27; oder Prompt-Injection erkannt</li><li>INJ-02: Rollen-/System-Marker gefunden: &#x27;system note&#x27;</li><li>INJ-03: Exfiltrations-Aufforderung gefunden: &#x27;internal (price|attachments|documents)&#x27;</li></ul></td>
+      </tr>
+      <tr class="fam-quarantine">
+        <td class="col-mail"><span class="mail-id mono">M10</span>
+          <div class="subject">DRINGEND - Überweisung heute noch erforderlich</div>
+          <div class="from">Dr. Markus Hellwig (Geschäftsführer) &middot; markus.hellwig1978@gmail.com</div></td>
+        <td class="col-cat">Spam / Phishing<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-high"></i>hoch<div class="sub tnum">Score 80&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-quarantine"></i>Quarantäne</span>
+          <div class="sub">Security-Quarantäne</div></td>
+        <td class="col-why"><ul class="reasons"><li>Sicherheitsrisiko &#x27;high&#x27; oder Prompt-Injection erkannt</li><li>BEC-01: Absendername &#x27;Dr. Markus Hellwig (Geschäftsführer)&#x27; suggeriert Geschäftsführung, aber Absenderdomain &#x27;gmail.com&#x27; ist nicht die Firmendomain &#x27;nordlicht-solar.de&#x27; (Display-Name-Spoofing)</li><li>BEC-02: Zahlungs-/Bankdatenänderung kombiniert mit Dringlichkeit: &#x27;überweisen sie&#x27; + &#x27;heute noch&#x27;</li></ul></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M11</span>
+          <div class="subject">Bewerbung als Elektrikerin</div>
+          <div class="from">Julia Schmidt &middot; julia.schmidt.bewerbung@outlook.com</div></td>
+        <td class="col-cat">Bewerbung<div class="sub tnum">Konfidenz 85&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch weitergeleitet</span>
+          <div class="sub">Personal (HR)</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;job_application&#x27; -&gt; automatisches Routing an Personal (HR)</li><li>Entwurf erstellt (Kategorie: job_application)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihre Bewerbung und das damit verbundene Interesse an Nordlicht Solar. Wir haben Ihre Unterlagen an unsere Personalabteilung weitergeleitet und melden uns zeitnah bei Ihnen.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M12</span>
+          <div class="subject">Automatische Antwort: Abwesend</div>
+          <div class="from">Markus Fischer &middot; m.fischer@partnerfirma-elektro.de</div></td>
+        <td class="col-cat">Auto-Antwort<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch archiviert</span>
+          <div class="sub">Archiv</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;auto_reply&#x27; mit ausreichender Konfidenz -&gt; automatisches Archivieren</li></ul></td>
+      </tr>
+      <tr class="fam-draft">
+        <td class="col-mail"><span class="mail-id mono">M13</span>
+          <div class="subject">Status meiner Bestellung NS-2026-0457</div>
+          <div class="from">Sandra Krause &middot; s.krause@gmx.de</div></td>
+        <td class="col-cat">Auftragsstatus<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-draft"></i>Entwurf zur Prüfung</span>
+          <div class="sub">Kundenservice</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;order_status&#x27; -&gt; Entwurf zur menschlichen Freigabe</li><li>Entwurf erstellt (Kategorie: order_status)</li><li>ERP-Abgleich für den Bestellstatus ist im Prototyp ein Stub; Status vor dem Versand manuell prüfen</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihre Nachricht. Wir prüfen den aktuellen Status Ihrer Bestellung und melden uns schnellstmöglich mit einem Update bei Ihnen.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-human">
+        <td class="col-mail"><span class="mail-id mono">M14</span>
+          <div class="subject">Frage zu Einkaufsmarge und Projekt Polarstern</div>
+          <div class="from">Anna Reuter &middot; einkauf@stadtwerke-luebeck.de</div></td>
+        <td class="col-cat">Anfrage interner Infos<div class="sub tnum">Konfidenz 80&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-human"></i>An Mensch eskaliert</span>
+          <div class="sub">Kundenservice</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;internal_info_request&#x27; erfordert menschliche Entscheidung</li><li>Entwurf erstellt (Kategorie: internal_info_request)</li></ul><details><summary>Antwortentwurf anzeigen</summary><pre class='draft'>Sehr geehrte Damen und Herren,
+
+vielen Dank für Ihre Nachricht. Zu internen Kalkulationen, Einkaufspreisen oder laufenden internen Projekten können wir grundsätzlich keine Auskunft erteilen. Für öffentliche Informationen zu unseren Produkten und Leistungen stehen wir Ihnen gerne zur Verfügung.
+
+Mit freundlichen Grüßen
+Ihr Nordlicht Solar Team</pre></details></td>
+      </tr>
+      <tr class="fam-human">
+        <td class="col-mail"><span class="mail-id mono">M15</span>
+          <div class="subject">Kurze Frage</div>
+          <div class="from">R. Petersen &middot; info.altkunde@gmail.com</div></td>
+        <td class="col-cat">Unklar<div class="sub tnum">Konfidenz 35&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-human"></i>An Mensch eskaliert</span>
+          <div class="sub">Kundenservice</div></td>
+        <td class="col-why"><ul class="reasons"><li>Konfidenz 0.35 liegt unter min_confidence (0.6)</li></ul></td>
+      </tr>
+      <tr class="fam-auto">
+        <td class="col-mail"><span class="mail-id mono">M16</span>
+          <div class="subject">Auskunftsersuchen nach Art. 15 DSGVO</div>
+          <div class="from">Bettina Thiel &middot; b.thiel@web.de</div></td>
+        <td class="col-cat">DSGVO-Anfrage<div class="sub tnum">Konfidenz 95&nbsp;%</div></td>
+        <td class="col-risk"><i class="dot risk-none"></i>kein<div class="sub tnum">Score 0&nbsp;/&nbsp;100</div></td>
+        <td class="col-decision"><span class="badge"><i class="dot dot-auto"></i>Automatisch weitergeleitet</span>
+          <div class="sub">Datenschutz</div></td>
+        <td class="col-why"><ul class="reasons"><li>Kategorie &#x27;gdpr_request&#x27; -&gt; automatisches Routing an Datenschutz</li><li><strong class="deadline">GDPR-Anfrage: keine automatische Antwort, Frist beachten (1 Monat, Art. 12 DSGVO)</strong></li></ul></td>
+      </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="annahmen">
+    <div class="wrap">
+      <div class="block__head">
+        <h2>Annahmen hinter den Zeitwerten</h2>
+        <p>Aus policy.toml [metrics]. Schätzungen, die eine Messung im echten Betrieb vorbereiten, nicht ersetzen.</p>
+      </div>
+      <table class="spec-sheet"><tbody><tr><th scope="row" class="tnum">1,5&nbsp;min</th><td>Manuelle Triage je Mail</td><td class="spec__note">Lesen, Entscheiden, Weiterleiten. Baseline ohne Agent.</td></tr><tr><th scope="row" class="tnum">0,5&nbsp;min</th><td>Sichtung mit KI-Vorschlag</td><td class="spec__note">Kategorie und Zusammenfassung liegen vor. Auf Stufe 0 gilt weiterhin die volle Triage-Zeit.</td></tr><tr><th scope="row" class="tnum">1,0&nbsp;min</th><td>Prüfung eines Antwortentwurfs</td><td class="spec__note">Entwurf aus der öffentlichen Wissensbasis, vom Leak-Guard freigegeben.</td></tr><tr><th scope="row" class="tnum">0,5&nbsp;min</th><td>Bestätigung einer Quarantäne</td><td class="spec__note">Kurzer Blick auf die Regelbefunde.</td></tr><tr><th scope="row" class="tnum">0,2&nbsp;min</th><td>Stichprobe je automatischer Weiterleitung</td><td class="spec__note">Nicht jede Mail, sondern eine Stichprobe im Aggregat.</td></tr></tbody></table>
+      <p class="note">Kategoriespezifische Bearbeitungszeiten nach der Triage stehen in [metrics.manual_minutes]. Die Seite ist druckoptimiert.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="closing">
+      <p>Ergebnis dieses Laufs: 4 Angriffe gestoppt, 7 von 16 Mails automatisch erledigt,
+      9 bewusst beim Menschen gelassen. Kein Entwurf hat interne Informationen verlassen.</p>
+      <p>Nächster Schritt: Entscheidungen mit <code>review.py</code> bestätigen oder ablehnen. Liegt die Zustimmungsrate nach 50 Reviews über 95&nbsp;%, empfiehlt das System die nächste Autonomiestufe.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="foot-line">
+  <div class="wrap">
+    <span>Nordlicht Solar GmbH</span><span>info@nordlicht-solar.de</span><span>Lauf vom 23.09.2026, 21:19</span><span>erzeugt von run_triage.py</span>
+  </div>
+</footer>
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) { return; }
+    var href = link.getAttribute('href');
+    if (!href || href.length < 2) { return; }
+    var target = document.getElementById(href.slice(1));
+    if (!target) { return; }
+    try {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', href);
+    } catch (err) {}
+  });
+
+  var fig = document.querySelector('[data-count]');
+  if (!fig || reduce) { return; }
+  var target = parseInt(fig.getAttribute('data-count'), 10);
+  if (!(target > 0)) { return; }
+  var start = null, dur = 500;
+  fig.textContent = '0';
+  function tick(t) {
+    if (start === null) { start = t; }
+    var p = Math.min(1, (t - start) / dur);
+    var eased = 1 - Math.pow(1 - p, 3);
+    fig.textContent = String(Math.round(eased * target));
+    if (p < 1) { window.requestAnimationFrame(tick); }
+  }
+  window.requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
