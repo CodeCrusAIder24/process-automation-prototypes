@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mail Triage Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Hallmark · genre: modern-minimal · macrostructure: Stat-Led · theme: Cobalt · enrichment: none · nav: N9 · footer: Ft2 · tone: technical · anchor hue: 256 · audience: recruiter · use: understand the run in 60 s
+   · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V5 */
+/* Design tokens for the Mail Triage Agent report. triage/report.py inlines this file
+   into the generated out/report.html so the page stays a single self-contained file.
+   Every colour and font in the page references one of these tokens. */
+:root {
+  /* paper and ink, cool-tinted toward the cobalt anchor */
+  --color-paper:          oklch(98.5% 0.004 250);
+  --color-paper-2:        oklch(96.5% 0.006 250);
+  --color-paper-glass:    oklch(98.5% 0.004 250 / 0.88);
+  --color-rule:           oklch(88% 0.012 250);
+  --color-rule-strong:    oklch(78% 0.016 252);
+  --color-ink:            oklch(24% 0.02 258);
+  --color-ink-2:          oklch(34% 0.018 257);
+  --color-muted:          oklch(46% 0.016 255);
+
+  /* the one dark band */
+  --color-graphite:       oklch(22% 0.016 260);
+  --color-graphite-2:     oklch(27% 0.018 260);
+  --color-graphite-rule:  oklch(34% 0.02 260);
+  --color-graphite-ink:   oklch(95% 0.008 250);
+  --color-graphite-muted: oklch(74% 0.014 252);
+
+  /* the single signal accent */
+  --color-accent:         oklch(54% 0.20 256);
+  --color-accent-ink:     oklch(99% 0.004 250);
+  --color-accent-soft:    oklch(86% 0.08 256);
+  --color-accent-on-dark: oklch(78% 0.13 256);
+  --color-focus:          oklch(54% 0.20 256);
+
+  /* data-status tokens: decision families and risk levels. Semantic, never decorative. */
+  --color-status-auto:        oklch(54% 0.20 256);
+  --color-status-draft:       oklch(80% 0.16 85);
+  --color-status-human:       oklch(70% 0.16 45);
+  --color-status-quarantine:  oklch(48% 0.20 25);
+  --color-status-good:        oklch(60% 0.17 145);
+  --color-neutral-fill:       oklch(72% 0.012 252);
+
+  /* type */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body:    "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Cascadia Mono", ui-monospace, monospace;
+
+  --text-xs:   0.75rem;    /* 12px, mono labels only */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-md:   1.25rem;    /* 20px */
+  --text-lg:   1.5625rem;  /* 25px */
+  --text-xl:   1.953rem;   /* 31px */
+  --text-2xl:  2.441rem;   /* 39px */
+  --text-display-s: clamp(2rem, 2.2vw + 1.1rem, 3rem);
+  --text-figure:    clamp(6rem, 13vw, 11rem);
+
+  /* 4-point spacing scale */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  /* shape and depth */
+  --radius-control: 6px;
+  --radius-card:    10px;
+  --shadow-whisper: 0 1px 2px oklch(24% 0.02 258 / 0.05);
+
+  /* layers */
+  --z-base: 1;
+  --z-sticky-nav: 300;
+  --banner-height: 56px;
+}
+
+
+  html, body { overflow-x: clip; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scrollbar-color: var(--color-rule-strong) var(--color-paper); }
+  body {
+    margin: 0; background: var(--color-paper); color: var(--color-ink-2);
+    font-family: var(--font-body); font-weight: 400; font-size: var(--text-base); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 2px; }
+  a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-rule-strong); text-decoration-thickness: 1px; text-underline-offset: 3px;
+      transition: text-decoration-color var(--dur-micro) var(--ease-out); }
+  a:hover { text-decoration-color: var(--color-accent); }
+  .mono { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--space-lg); }
+
+  /* top bar, same shape as the report's nav */
+  .nav { position: sticky; top: 0; z-index: var(--z-sticky-nav); height: var(--banner-height); background: var(--color-paper-glass); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-rule); }
+  .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); }
+  .wordmark { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); letter-spacing: -0.02em; color: var(--color-ink); text-decoration: none; white-space: nowrap; line-height: 1; }
+  .nav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-lg); }
+  .nav__links a { color: var(--color-ink-2); text-decoration: none; white-space: nowrap; line-height: 1; padding: var(--space-xs) 0; position: relative; }
+  .nav__links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-short) var(--ease-out); }
+  .nav__links a:hover::after, .nav__links a:focus-visible::after { transform: scaleX(1); }
+
+  /* layout: sidebar TOC + prose column */
+  .layout { max-width: 72rem; margin: 0 auto; padding: var(--space-xl) var(--space-lg) var(--space-3xl); }
+  .sidebar { margin-bottom: var(--space-xl); }
+  .toc-summary { cursor: pointer; font-size: var(--text-sm); color: var(--color-ink); font-weight: 500; padding: var(--space-xs) 0; list-style: none; }
+  .toc-summary::-webkit-details-marker { display: none; }
+  .toc-summary::before { content: "\25B8"; display: inline-block; margin-right: var(--space-xs); transition: transform var(--dur-micro) var(--ease-out); }
+  details[open] > .toc-summary::before { transform: rotate(90deg); }
+  .toc { font-size: var(--text-sm); margin-top: var(--space-sm); }
+  .toc ul { list-style: none; margin: 0; padding-left: var(--space-md); }
+  .toc > ul { padding-left: 0; }
+  .toc li { margin: var(--space-3xs) 0; }
+  .toc a { display: block; color: var(--color-muted); text-decoration: none; padding: var(--space-3xs) 0 var(--space-3xs) var(--space-sm); border-left: 1px solid var(--color-rule); margin-left: -1px; }
+  .toc a:hover { color: var(--color-ink); }
+  .toc a.is-active { color: var(--color-ink); border-left: 1px solid var(--color-accent); font-weight: 500; }
+
+  /* prose */
+  .prose { max-width: 68ch; overflow-wrap: anywhere; }
+  .prose > *:first-child { margin-top: 0; }
+  .prose h1, .prose h2, .prose h3, .prose h4 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.025em; color: var(--color-ink); text-wrap: balance; scroll-margin-top: calc(var(--banner-height) + var(--space-lg)); }
+  .prose h1 { font-size: var(--text-2xl); line-height: 1.1; margin: 0 0 var(--space-lg); }
+  .prose h2 { font-size: var(--text-xl); line-height: 1.15; margin: var(--space-2xl) 0 var(--space-md); padding-top: var(--space-lg); border-top: 1px solid var(--color-rule); }
+  .prose h2:first-of-type { padding-top: 0; border-top: 0; }
+  .prose h3 { font-size: var(--text-md); line-height: 1.25; margin: var(--space-xl) 0 var(--space-sm); }
+  .prose h4 { font-size: var(--text-base); margin: var(--space-lg) 0 var(--space-2xs); }
+  .prose p, .prose ul, .prose ol, .prose blockquote, .prose .table-scroll, .prose pre, .prose hr { margin: 0 0 var(--space-md); }
+  .prose ul, .prose ol { padding-left: var(--space-lg); }
+  .prose li + li { margin-top: var(--space-2xs); }
+  .prose hr { border: 0; border-top: 1px solid var(--color-rule); margin-top: var(--space-2xl); margin-bottom: var(--space-2xl); }
+  .prose strong { color: var(--color-ink); font-weight: 600; }
+  .prose code { font-family: var(--font-mono); font-size: 0.875em; background: var(--color-paper-2); border: 1px solid var(--color-rule); border-radius: var(--radius-control); padding: 0.1em 0.35em; }
+  .prose pre { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.5; background: var(--color-paper-2); border: 1px solid var(--color-rule); border-radius: var(--radius-control); padding: var(--space-md); overflow-x: auto; white-space: pre; }
+  .prose pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+  .prose blockquote { padding-left: var(--space-md); border-left: 1px solid var(--color-rule-strong); color: var(--color-muted); }
+  .prose blockquote p { margin: 0; }
+  .table-scroll { overflow-x: auto; }
+  .prose table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+  .prose th, .prose td { text-align: left; padding: var(--space-sm) var(--space-md) var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+  .prose thead th { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); font-weight: 500; white-space: nowrap; }
+
+  @media (min-width: 64rem) {
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-2xl); align-items: start; }
+    .sidebar { margin-bottom: 0; position: sticky; top: calc(var(--banner-height) + var(--space-lg)); max-height: calc(100vh - var(--banner-height) - var(--space-2xl)); overflow-y: auto; align-self: start; }
+    .toc-summary { display: none; }
+  }
+
+  @media (max-width: 48rem) {
+    .nav__links { display: none; }
+  }
+
+  @media print {
+    .nav, .sidebar { display: none; }
+    .table-scroll { overflow: visible; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 1ms !important; }
+  }
+</style>
+</head>
+<body>
+<header class="nav" role="banner">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Mail Triage Agent</a>
+    <nav aria-label="Links">
+      <ul class="nav__links mono">
+        <li><a href="../out/report.html">Report &ouml;ffnen</a></li>
+        <li><a href="../README.md">README auf GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="layout" id="top">
+  <aside class="sidebar">
+    <details class="toc-wrap">
+      <summary class="toc-summary">Inhalt</summary>
+      <nav aria-label="Inhaltsverzeichnis"><div class="toc">
+<ul>
+<li><a href="#demo-in-60-seconds">Demo in 60 seconds</a></li>
+<li><a href="#starting-situation-ausgangslage">Starting situation (Ausgangslage)</a></li>
+<li><a href="#solution-design-losungsdesign">Solution design (Lösungsdesign)</a><ul>
+<li><a href="#security-by-design">Security by design</a></li>
+<li><a href="#autonomy-levels-ramp-up">Autonomy levels / ramp-up</a></li>
+</ul>
+</li>
+<li><a href="#value-delivered-nutzen">Value delivered (Nutzen)</a><ul>
+<li><a href="#ramp-up-curve-what-if-same-mail-set-levels-0-3">Ramp-up curve (what-if, same mail set, levels 0-3)</a></li>
+</ul>
+</li>
+<li><a href="#next-steps-to-production">Next steps to production</a></li>
+<li><a href="#kurzfassung-auf-deutsch">Kurzfassung auf Deutsch</a></li>
+<li><a href="#project-structure">Project structure</a><ul>
+<li><a href="#running-with-a-real-llm">Running with a real LLM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+    </details>
+  </aside>
+  <script>
+(function () {
+  var d = document.querySelector('details.toc-wrap');
+  if (!d) { return; }
+  var mq = window.matchMedia('(min-width: 64rem)');
+  function sync() { if (mq.matches) { d.setAttribute('open', ''); } else { d.removeAttribute('open'); } }
+  sync();
+  if (mq.addEventListener) { mq.addEventListener('change', sync); } else { mq.addListener(sync); }
+})();
+</script>
+  <main class="prose">
+<h1 id="mail-triage-agent">Mail Triage Agent</h1>
+<p>A small, working prototype that reads a shared company inbox, screens every mail for
+security threats (phishing, prompt injection, CEO fraud/BEC), classifies it, and decides
+per mail whether to act automatically or hand it to a human - according to a configurable
+<strong>autonomy level</strong> that can be ramped up over time as trust is earned.</p>
+<p>Fictional company: <strong>Nordlicht Solar GmbH</strong> (German SME selling and installing solar
+systems, shared inbox <code>info@nordlicht-solar.de</code>).</p>
+<p><strong>Deutsche Kurzfassung:</strong> Ausgangslage, Lösung und Nutzen auf Deutsch stehen in
+<a href="#kurzfassung-auf-deutsch">Kurzfassung auf Deutsch</a>.</p>
+<p><strong>Portfolio pieces:</strong> this repo holds two prototypes. Piece 1 is this Mail Triage
+Agent (below). Piece 2 is <a href="../invoice_match/docs/index.html">Invoice Match</a> - automated 3-way
+supplier-invoice verification (Rechnung / Bestellung / Wareneingang) for a retail
+chain, with deterministic, auditable payment decisions.</p>
+<h2 id="demo-in-60-seconds">Demo in 60 seconds</h2>
+<pre><code class="language-bash">pip install -r requirements.txt
+python run_triage.py --no-llm
+python -m pytest -q
+</code></pre>
+<p>Prefer reading in the browser? <code>python build_readme.py</code> renders this README to
+<code>docs/index.html</code>.</p>
+<p>You will see: a console table with all 16 sample mails, their category, risk level and
+decision; two obvious attacks (phishing, CEO fraud) and two prompt-injection mails sent
+straight to quarantine; KPIs for time saved; and a path to <code>out/report.html</code> - a
+self-contained dashboard you can open in any browser.</p>
+<hr />
+<h2 id="starting-situation-ausgangslage">Starting situation (Ausgangslage)</h2>
+<p>A shared inbox such as <code>info@</code> or <code>support@</code> at a small or mid-sized company receives
+roughly 50 to 150 mails a day: customer questions, quote requests, supplier invoices,
+applications, meeting requests, newsletters, spam and phishing. Today one or two
+back-office people read every single mail, decide what it is, who should get it and
+whether it is safe, then re-type the key facts into a ticket or ERP system - a media
+break (Medienbruch) - and write routine answers by hand.</p>
+<p>The bottleneck is the triage decision itself, which touches 100 percent of the volume
+although well over half of it is routine or noise. <strong>Affected:</strong> office staff working
+interrupt-driven at two to three minutes per mail, specialists who receive their mails
+hours late, customers waiting for standard answers. <strong>Risk:</strong> under time pressure,
+phishing and social engineering slip through, and handling is inconsistent. <strong>Worth
+automating</strong> because the decision is repetitive and well structured, volume is steady,
+and the damage of a wrong decision can be capped by design with a human in the loop for
+anything non-trivial.</p>
+<h2 id="solution-design-losungsdesign">Solution design (Lösungsdesign)</h2>
+<pre><code>                 ┌───────────────────┐
+  inbox.json --&gt; │  1. Security       │  rules-based, deterministic
+ (mock mailbox)  │     screen         │  risk score 0-100, findings, sanitized_body
+                 └─────────┬─────────┘
+                           │
+                 ┌─────────▼─────────┐
+                 │  2. Classifier      │  LLM (structured JSON) with heuristic
+                 │                     │  fallback; mail body = untrusted &lt;email&gt; data
+                 └─────────┬─────────┘
+                           │
+                 ┌─────────▼─────────┐
+                 │  3. Policy engine   │  autonomy level 0-3, hard override rules
+                 │                     │  (quarantine, GDPR, low confidence, ...)
+                 └─────────┬─────────┘
+                           │
+                 ┌─────────▼─────────┐
+                 │  4. Reply drafting  │  templates from public_faq.md only
+                 │     + leak guard    │  blocks internal terms/IBAN/API keys/URLs
+                 └─────────┬─────────┘
+                           │
+                 ┌─────────▼─────────┐
+                 │  5. Report / audit  │  console, results.json, audit.jsonl,
+                 │                     │  report.html, feedback loop (review.py)
+                 └────────────────────┘
+</code></pre>
+<p><strong>Why this approach.</strong> A rules-first security screen catches structural attack patterns
+(instruction-override phrases, link/domain mismatches, display-name spoofing) whether or
+not any LLM is even involved, and its verdict is treated as authoritative. The LLM
+classifier only runs on sanitized text, is told explicitly that the mail content is
+untrusted data it must never obey, and is asked to self-report suspected injection as a
+second, independent signal. The policy engine keeps the actual business rules
+data-driven and inspectable, with a small set of hard overrides that no autonomy level
+can bypass. A leak guard checks every piece of outbound text against a denylist built
+from internal-only information before anything is proposed as a reply. Every decision is
+logged to an audit trail, and a human-feedback loop tracks whether the agent's decisions
+are actually agreed with before autonomy is increased.</p>
+<p><strong>Rejected alternatives:</strong>
+- <em>Pure rules, no classifier</em> - cannot read intent or handle the long tail of phrasing;
+  either over-blocks legitimate mail or misses novel wording.
+- <em>Fully autonomous LLM agent with send-mail tools</em> - unbounded blast radius on day one;
+  a single successful prompt injection could leak data or send money. Not acceptable for
+  a first deployment.
+- <em>n8n / Power Automate alone</em> - fine as a trigger/transport layer later, but the
+  classification and security logic must be inspectable, testable, and versionable in
+  code, not buried in a low-code canvas.</p>
+<p>The LLM is a replaceable component behind an OpenAI-compatible interface, so the same
+pipeline runs against a hosted API, a local model or an internal company server.</p>
+<h3 id="security-by-design">Security by design</h3>
+<ul>
+<li><strong>Prompt injection:</strong> deterministic rules (<code>INJ-01/02/03</code>) detect instruction-override
+  phrases, role/system markers and exfiltration asks in both German and English; the
+  mail body is sanitized before it reaches the LLM; the LLM is separately instructed to
+  treat all mail content as untrusted data and to self-report injection attempts. Either
+  signal being true sets <code>injection_suspected = true</code>.</li>
+<li><strong>Phishing / BEC indicators:</strong> link-text vs. href mismatches and lookalike domains
+  (<code>PHI-02</code>), credential/urgency lures (<code>PHI-01</code>), display-name spoofing of an executive
+  from an external domain (<code>BEC-01</code>), and payment/bank-detail-change requests combined
+  with urgency (<code>BEC-02</code>).</li>
+<li><strong>Leak guard:</strong> every drafted reply is checked against a denylist derived from
+  <code>knowledge/internal_confidential.md</code> (codenames, prices, customer names, IBAN, API
+  keys, internal URLs) plus generic patterns (IBAN regex, <code>sk-...</code> keys, <code>intern.*</code>
+  URLs). A failing check downgrades the decision to <code>ESCALATE_HUMAN</code> - the draft is
+  never sent.</li>
+<li><strong>Quarantine overrides everything.</strong> Risk level <code>high</code> or <code>injection_suspected</code> always
+  wins over the configured autonomy level, at every level from 0 to 3.</li>
+<li><strong>No send capability.</strong> This prototype never sends a single mail. Every "reply" is a
+  draft written to <code>results.json</code> for a human (or a future, separately-approved outbox)
+  to send.</li>
+</ul>
+<h3 id="autonomy-levels-ramp-up">Autonomy levels / ramp-up</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Name</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Observe</td>
+<td>AI only suggests; everything -&gt; <code>ESCALATE_HUMAN</code> or <code>DRAFT_FOR_REVIEW</code>. Security findings still shown.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Assist</td>
+<td>Newsletter/auto-reply -&gt; auto-archive; invoice/job application/meeting/sales lead/GDPR -&gt; auto-route (+ draft); FAQ/order status -&gt; draft for review; complaint/unclear/internal-info-request -&gt; escalate.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Act low-risk</td>
+<td>As level 1, plus FAQ questions -&gt; auto-reply when confidence ≥ 0.90, risk <code>none</code>, and the leak guard passes.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Extended</td>
+<td>Plus order-status acknowledgements -&gt; auto-reply under the same conditions.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hard rules override every level (see <code>triage/policy.py</code>): risk <code>high</code> or injection -&gt;
+quarantine; risk <code>medium</code> -&gt; escalate; requests for non-public info never get an
+auto-reply; GDPR requests never get an auto-reply; confidence below <code>min_confidence</code>
+always escalates.</p>
+<p><strong>Trust rule (<code>review.py</code>):</strong> ramp-up to the next level is only recommended once at
+least <code>min_reviewed</code> (default 50) human reviews have accumulated and the agreement rate
+is at least <code>min_agreement</code> (default 95%) - see <code>policy.toml [trust]</code>.</p>
+<p><strong>Reply wording as data, not code.</strong> The actual German sentences sent in a draft live in
+plain text files under <code>templates/*.txt</code> (one per category, plus shared <code>_greeting.txt</code> /
+<code>_signoff.txt</code>), not hardcoded in <code>triage/respond.py</code>. Each file starts with a <code>#</code>-comment
+header documenting which category it answers and which <code>{placeholder}</code> fields it can use;
+facts are filled in from <code>knowledge/public_faq.md</code> only. A non-developer can reword a
+reply by editing a <code>.txt</code> file - no Python change needed. Templates never see the mail
+body or sender address (only the subject, mail id, and public FAQ facts), and every
+rendered draft still passes through the leak guard (<code>check_outbound</code>) before it is
+proposed - an unresolved placeholder is reported as a reason rather than silently sent or
+raising an exception.</p>
+<h2 id="value-delivered-nutzen">Value delivered (Nutzen)</h2>
+<p>Numbers below are from an actual run of <code>python run_triage.py --no-llm</code> over the 16
+sample mails at autonomy level 1 (heuristic classifier, fully offline). <strong>These are
+estimates</strong>, based on the assumptions in <code>policy.toml [metrics]</code>, not measured production
+data:</p>
+<ul>
+<li><code>triage_minutes</code> (1.5) - manual read + decide + forward, spent on <strong>every</strong> mail in the
+  baseline (before automation), regardless of category.</li>
+<li>category-specific <code>manual_minutes</code> - the handling time <em>after</em> triage (writing a
+  reply, booking a meeting, filing an invoice, ...).</li>
+<li><code>assisted_triage_minutes</code> (0.5) - even when a human still makes the final call, they
+  only have to glance at the AI's category + summary instead of triaging from scratch.
+  <strong>Exception at level 0 (Observe):</strong> the human is checking the AI, not relying on it, so
+  every mail is still read in full (<code>triage_minutes</code>) and quarantines are confirmed at
+  full reading cost too. Only prepared drafts earn a time credit at level 0, which is why
+  the saving there comes almost entirely from drafting.</li>
+<li><code>draft_review_minutes</code> (1.0), <code>quarantine_confirm_minutes</code> (0.5) and
+  <code>auto_spot_check_minutes</code> (0.2) - the residual human effort for a reviewed draft, a
+  confirmed quarantine, and a spot-checked auto-routed mail respectively.</li>
+</ul>
+<p>Every mail is priced baseline = <code>triage_minutes + manual_minutes[category]</code>, and priced
+after-automation according to the decision it actually received (see
+<code>triage/metrics.py</code> for the exact per-decision formula). This is why even autonomy level
+0 ("Observe", nothing is sent automatically) still shows a real but <em>smaller</em> saving than
+level 1-3: the human is spared the from-scratch triage step and, where a draft was
+generated, most of the drafting time - but still fully owns every decision and every
+send.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>KPI (level 1, this run)</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mails total</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Auto-handled</td>
+<td>7 (43.8%)</td>
+</tr>
+<tr>
+<td>Human required</td>
+<td>9 (56.2%)</td>
+</tr>
+<tr>
+<td>Threats blocked (quarantined)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Injection attempts detected</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Minutes before (baseline)</td>
+<td>63.5</td>
+</tr>
+<tr>
+<td>Minutes after</td>
+<td>24.5</td>
+</tr>
+<tr>
+<td>Minutes saved</td>
+<td>39.0 (61.4%)</td>
+</tr>
+<tr>
+<td>Extrapolated at 80 mails/day, 21 working days/month</td>
+<td><strong>68.2 hours saved/month</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ramp-up-curve-what-if-same-mail-set-levels-0-3">Ramp-up curve (what-if, same mail set, levels 0-3)</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Auto-handled</th>
+<th>Time saved</th>
+<th>Hours saved / month</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 Observe</td>
+<td>0.0%</td>
+<td>30.7%</td>
+<td>34.1 h</td>
+</tr>
+<tr>
+<td>1 Assist</td>
+<td>43.8%</td>
+<td>61.4%</td>
+<td>68.2 h</td>
+</tr>
+<tr>
+<td>2 Act low-risk</td>
+<td>50.0%</td>
+<td>63.6%</td>
+<td>70.7 h</td>
+</tr>
+<tr>
+<td>3 Extended</td>
+<td>56.2%</td>
+<td>65.8%</td>
+<td>73.2 h</td>
+</tr>
+</tbody>
+</table></div>
+<p>Qualitative value beyond the raw minutes: <strong>consistent handling</strong> of every mail
+regardless of who is on shift or how busy they are; a <strong>full audit trail</strong>
+(<code>out/audit.jsonl</code>) of every decision and why it was made; <strong>threats caught</strong> that a
+tired human might click through under time pressure; and <strong>faster routing</strong> to the right
+department (<code>Vertrieb</code>, <code>Buchhaltung</code>, <code>Personal (HR)</code>, <code>Datenschutz</code>, ...) without
+manual triage.</p>
+<h2 id="next-steps-to-production">Next steps to production</h2>
+<p>Connect a real mailbox via Microsoft Graph or IMAP in <strong>read-only</strong> mode first (see the
+adapter-interface comment in <code>triage/ingest.py</code>), and only ever send mail through a
+separate, human-approved outbox - never automatically from the classifier/policy path;
+keep secrets (API keys, mailbox credentials) in a proper vault, not environment
+variables; build a labelled evaluation set of real mails and run it as a regression test
+before every policy change; monitor the human-agreement rate and watch for drift over
+time; maintain a red-team set of injection/phishing/BEC samples that must stay at 100%
+detection as a release gate; do a GDPR (DSGVO) review covering data minimization and
+EU-hosted or zero-retention API terms for any LLM calls; integrate with the real
+ticket/ERP system to close the media break instead of just labelling category and
+department; and keep a one-command rollback switch back to autonomy level 0 at all
+times.</p>
+<h2 id="kurzfassung-auf-deutsch">Kurzfassung auf Deutsch</h2>
+<p><strong>Ausgangslage:</strong> Ein gemeinsames Postfach wie <code>info@</code> oder <code>support@</code> erhält in einem
+kleinen oder mittleren Unternehmen täglich 50 bis 150 E-Mails: Kundenanfragen,
+Angebotswünsche, Lieferantenrechnungen, Bewerbungen, Terminanfragen, Newsletter, Spam und
+Phishing. Heute lesen ein bis zwei Mitarbeitende jede einzelne Mail, entscheiden, worum
+es geht, wer zuständig ist und ob die Mail sicher ist, übertragen die wichtigsten
+Informationen manuell in ein Ticket- oder ERP-System und beantworten Routinefragen von
+Hand. Der Engpass ist die Triage-Entscheidung selbst, die zwar auf 100 Prozent des
+Volumens angewendet wird, obwohl mehr als die Hälfte davon Routine oder Rauschen ist.
+Unter Zeitdruck können Phishing- und Social-Engineering-Versuche unbemerkt durchrutschen.</p>
+<p><strong>Lösung:</strong> Ein mehrstufiger Ansatz statt einer einzigen "smarten" KI: eine
+regelbasierte Sicherheitsprüfung erkennt Prompt-Injection-, Phishing- und
+CEO-Fraud-Muster unabhängig von der KI; ein LLM-Klassifikator kategorisiert jede Mail
+anhand strukturierter JSON-Ausgabe und behandelt den Mail-Inhalt dabei ausdrücklich als
+nicht vertrauenswürdige Daten; eine Policy-Engine trifft die eigentliche
+Automatisierungsentscheidung anhand einer konfigurierbaren Autonomiestufe, wobei feste
+Regeln (z.B. Quarantäne bei Risiko) jede Stufe überstimmen; ein Leak-Guard verhindert,
+dass jemals interne Informationen in einer automatisch erstellten Antwort landen; und
+ein Audit-Log sowie eine Feedback-Schleife machen jede Entscheidung nachvollziehbar und
+das System schrittweise vertrauenswürdiger.</p>
+<p><strong>Nutzen:</strong> Im Testlauf mit 16 Beispiel-Mails auf Autonomiestufe 1 wurden 43,8 Prozent
+der Mails automatisch bearbeitet, vier Bedrohungen (darunter zwei Prompt-Injection- und
+ein CEO-Fraud-Versuch) automatisch in Quarantäne verschoben, und geschätzt 61,4 Prozent
+der Bearbeitungszeit eingespart - hochgerechnet rund 68,2 Stunden pro Monat bei
+80 Mails/Tag. Darüber hinaus sorgt das System für einheitliche Bearbeitung, einen
+vollständigen Audit-Trail und schnellere Weiterleitung an die richtige Abteilung.</p>
+<h2 id="project-structure">Project structure</h2>
+<pre><code>README.md
+requirements.txt
+policy.toml                    # all tunables: weights, thresholds, routing, metrics, trust
+tokens.css                     # design tokens for the HTML report (inlined by triage/report.py)
+build_readme.py                # renders README.md -&gt; docs/index.html (same design tokens)
+run_triage.py                  # CLI entry point
+review.py                      # human feedback loop CLI
+triage/
+  __init__.py
+  models.py                    # Mail, SecurityScreen, Classification, Decision dataclasses
+  ingest.py                    # JSON inbox loader (+ adapter-interface comment)
+  security.py                  # rules-based screen -&gt; risk score, level, findings
+  classify.py                  # provider-agnostic LLM classifier (Anthropic + OpenAI-compatible) with heuristic fallback
+  policy.py                    # decision engine by autonomy level
+  respond.py                   # reply drafting from public knowledge + leak guard
+  metrics.py                   # before/after time-savings estimates
+  report.py                    # console table, results.json, audit.jsonl, report.html
+knowledge/
+  public_faq.md                 # safe to use in replies / LLM prompts
+  internal_confidential.md      # NEVER sent to any LLM; leak-guard denylist source only
+templates/                     # reply wording, editable without code; placeholders documented in each file
+samples/inbox.json              # 16 example mails
+tests/                           # pytest suite
+  test_llm_backend.py            # OpenAI-compatible backend + resolve_provider, offline (stdlib http.server)
+out/                             # generated: results.json, audit.jsonl, report.html
+docs/index.html                  # generated: README rendered to HTML by build_readme.py
+.env.example                     # copy to .env: pick one of four ready-made LLM configs
+</code></pre>
+<h3 id="running-with-a-real-llm">Running with a real LLM</h3>
+<p>The classifier is provider-agnostic: one backend (<code>classify_with_openai_compatible</code> in
+<code>triage/classify.py</code>) speaks the OpenAI chat-completions shape - a base URL plus a model
+name, stdlib <code>urllib</code> only, no vendor SDK - so the exact same pipeline runs unmodified
+against a hosted API, a local model, or an internal company server. A separate Anthropic
+backend is kept for calling Claude directly. Which one runs is picked by
+<code>--provider {auto,anthropic,openai,heuristic}</code> (default <code>auto</code>) or the
+<code>TRIAGE_LLM_PROVIDER</code> env var; <code>auto</code> picks <code>openai</code> if <code>TRIAGE_LLM_BASE_URL</code> is set, else
+<code>anthropic</code> if <code>ANTHROPIC_API_KEY</code> is set, else the offline heuristic - so the demo keeps
+running with no configuration at all.</p>
+<p>Transient errors and rate limits (HTTP 429/5xx, or a network-level timeout) are retried
+using the provider's own <code>Retry-After</code>/<code>x-ratelimit-reset-*</code> headers to size the wait, up
+to 3 attempts with a 60 s cap per wait (both configurable, see <code>LLM_MAX_ATTEMPTS</code>/
+<code>TRIAGE_LLM_MAX_ATTEMPTS</code> and <code>LLM_MAX_WAIT_SECONDS</code> in <code>triage/classify.py</code>). JSON-mode
+validation failures (a reasoning model spends its token budget on reasoning instead of
+JSON) are recovered from the provider's <code>failed_generation</code> field when it already contains
+a usable classification, or by retrying once without <code>response_format</code>. Either way, the
+provider's own error text ends up in the per-mail reasons/labels, so misconfiguration -
+wrong model name, a blocked <code>User-Agent</code>, an expired key - is visible instead of a bare
+"HTTP 400: Bad Request". Note that a free tier such as Groq's only exposes a subset of
+models (e.g. <code>openai/gpt-oss-120b</code>, <code>qwen/qwen3.8-27b</code> as of writing) - check your
+console's Limits page and pick one of those rather than an arbitrary model id.</p>
+<pre><code class="language-bash">copy .env.example .env
+# edit .env: uncomment exactly one option (Ollama is active by default)
+python run_triage.py
+</code></pre>
+<p><code>.env.example</code> ships four ready-made configs, uncomment one:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A - Ollama (local)</td>
+<td>Free, private, DSGVO-friendly - keeps mail content on your machine. Needs an install and a model pull; slower than a hosted API on modest hardware.</td>
+</tr>
+<tr>
+<td>B - OpenRouter <code>:free</code> models</td>
+<td>Zero install, no card. Rate-limited (~50 requests/day), the free lineup rotates, and prompts may be used for training - fine for these fictional demo mails, not for real customer mail.</td>
+</tr>
+<tr>
+<td>C - Groq</td>
+<td>Fast free tier, OpenAI-compatible, no local install.</td>
+</tr>
+<tr>
+<td>D - Anthropic API</td>
+<td>Best quality of the four, paid, calls Claude directly (not through the OpenAI-compatible path).</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>.env</code> is loaded by a minimal stdlib loader in <code>run_triage.py</code> (no dependency) and never
+overrides a variable already set in your real environment; it is git-ignored so a key
+never ends up in a commit. Whichever backend ran - or that none did and the heuristic
+fallback kept the demo running fully offline - is shown in the console header and in the
+report (<code>out/report.html</code>), e.g. <code>openai-compatible:localhost:11434:qwen2.5:7b</code>; any LLM
+error (unreachable server, bad response) falls back to the heuristic automatically, with
+a one-time console notice rather than one per mail.</p>
+<p>You can still call the Anthropic API directly (Option D above, or without <code>.env</code> at all):</p>
+<pre><code class="language-bash"># Windows (persists across sessions):
+setx ANTHROPIC_API_KEY &quot;sk-ant-...&quot;
+setx TRIAGE_MODEL &quot;claude-haiku-4-5-20251001&quot;   # optional, this is already the default
+
+# or just for the current PowerShell session:
+$env:ANTHROPIC_API_KEY = &quot;sk-ant-...&quot;
+
+python run_triage.py --provider anthropic
+</code></pre>
+  </main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  if (!links.length || !('IntersectionObserver' in window)) { return; }
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var link = byId[entry.target.id];
+      if (!link) { return; }
+      link.classList.toggle('is-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '0px 0px -70% 0px' });
+  Object.keys(byId).forEach(function (id) {
+    var heading = document.getElementById(id);
+    if (heading) { observer.observe(heading); }
+  });
+})();
+</script>
+</body>
+</html>
