@@ -1,0 +1,83 @@
+/* Hallmark · genre: modern-minimal · macrostructure: Stat-Led · theme: Cobalt · enrichment: none · nav: N9 · footer: Ft2 · tone: technical · anchor hue: 256 · audience: recruiter · use: understand the run in 60 s
+   · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V5 */
+/* Design tokens for the Mail Triage Agent report. triage/report.py inlines this file
+   into the generated out/report.html so the page stays a single self-contained file.
+   Every colour and font in the page references one of these tokens. */
+:root {
+  /* paper and ink, cool-tinted toward the cobalt anchor */
+  --color-paper:          oklch(98.5% 0.004 250);
+  --color-paper-2:        oklch(96.5% 0.006 250);
+  --color-paper-glass:    oklch(98.5% 0.004 250 / 0.88);
+  --color-rule:           oklch(88% 0.012 250);
+  --color-rule-strong:    oklch(78% 0.016 252);
+  --color-ink:            oklch(24% 0.02 258);
+  --color-ink-2:          oklch(34% 0.018 257);
+  --color-muted:          oklch(46% 0.016 255);
+
+  /* the one dark band */
+  --color-graphite:       oklch(22% 0.016 260);
+  --color-graphite-2:     oklch(27% 0.018 260);
+  --color-graphite-rule:  oklch(34% 0.02 260);
+  --color-graphite-ink:   oklch(95% 0.008 250);
+  --color-graphite-muted: oklch(74% 0.014 252);
+
+  /* the single signal accent */
+  --color-accent:         oklch(54% 0.20 256);
+  --color-accent-ink:     oklch(99% 0.004 250);
+  --color-accent-soft:    oklch(86% 0.08 256);
+  --color-accent-on-dark: oklch(78% 0.13 256);
+  --color-focus:          oklch(54% 0.20 256);
+
+  /* data-status tokens: decision families and risk levels. Semantic, never decorative. */
+  --color-status-auto:        oklch(54% 0.20 256);
+  --color-status-draft:       oklch(80% 0.16 85);
+  --color-status-human:       oklch(70% 0.16 45);
+  --color-status-quarantine:  oklch(48% 0.20 25);
+  --color-status-good:        oklch(60% 0.17 145);
+  --color-neutral-fill:       oklch(72% 0.012 252);
+
+  /* type */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body:    "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Cascadia Mono", ui-monospace, monospace;
+
+  --text-xs:   0.75rem;    /* 12px, mono labels only */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-md:   1.25rem;    /* 20px */
+  --text-lg:   1.5625rem;  /* 25px */
+  --text-xl:   1.953rem;   /* 31px */
+  --text-2xl:  2.441rem;   /* 39px */
+  --text-display-s: clamp(2rem, 2.2vw + 1.1rem, 3rem);
+  --text-figure:    clamp(6rem, 13vw, 11rem);
+
+  /* 4-point spacing scale */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  /* shape and depth */
+  --radius-control: 6px;
+  --radius-card:    10px;
+  --shadow-whisper: 0 1px 2px oklch(24% 0.02 258 / 0.05);
+
+  /* layers */
+  --z-base: 1;
+  --z-sticky-nav: 300;
+  --banner-height: 56px;
+}

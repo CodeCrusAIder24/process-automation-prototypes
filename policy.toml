@@ -1,0 +1,91 @@
+# Mail Triage Agent - configuration
+# All tunable knobs live here so behaviour can be changed without touching code.
+
+[company]
+name = "Nordlicht Solar GmbH"
+domain = "nordlicht-solar.de"
+mailbox = "info@nordlicht-solar.de"
+# Names whose display name implies executive authority (BEC-01 check).
+executives = [
+    "Markus Hellwig",
+    "Dr. Markus Hellwig",
+    "Geschaeftsfuehrer",
+    "Geschäftsführer",
+]
+
+[autonomy]
+# 0 Observe, 1 Assist, 2 Act low-risk, 3 Extended
+level = 1
+min_confidence = 0.60
+faq_auto_reply_confidence = 0.90
+sales_order_auto_reply_confidence = 0.90
+
+[security.weights]
+INJ-01 = 45
+INJ-02 = 35
+INJ-03 = 45
+PHI-01 = 30
+PHI-02 = 40
+BEC-01 = 40
+BEC-02 = 40
+ATT-01 = 25
+
+[security.thresholds]
+# risk score (0-100, capped) -> level
+low = 20
+medium = 45
+high = 70
+
+[security.attachment_risk_extensions]
+extensions = [".exe", ".js", ".html", ".zip", ".docm", ".iso", ".scr"]
+
+[routing]
+# category -> department mailbox / team name used as `target`
+faq_question = "Kundenservice"
+sales_lead = "Vertrieb"
+order_status = "Kundenservice"
+invoice = "Buchhaltung"
+meeting_request = "Projektleitung"
+complaint = "Kundenservice-Eskalation"
+job_application = "Personal (HR)"
+gdpr_request = "Datenschutz"
+newsletter = "Archiv"
+auto_reply = "Archiv"
+spam_or_phishing = "Security-Quarantäne"
+internal_info_request = "Kundenservice"
+unclear = "Kundenservice"
+
+[metrics]
+mails_per_day = 80
+working_days_per_month = 21
+# Manual read + decide + forward, spent on EVERY mail in the baseline (before automation).
+triage_minutes = 1.5
+# After automation: a human still glances at the AI's category + summary before acting.
+assisted_triage_minutes = 0.5
+# Time to review an AI-drafted reply before it goes out (or gets routed with a draft attached).
+draft_review_minutes = 1.0
+# Time to confirm a quarantine decision was correct.
+quarantine_confirm_minutes = 0.5
+# Time to spot-check an auto-routed mail with no draft attached.
+auto_spot_check_minutes = 0.2
+
+# Handling time AFTER triage (i.e. actually dealing with the mail once you know what it
+# is) - does NOT include triage_minutes, which is added separately for the baseline.
+[metrics.manual_minutes]
+faq_question = 4
+sales_lead = 3
+order_status = 3
+invoice = 1
+meeting_request = 1.5
+complaint = 8
+job_application = 1
+gdpr_request = 5
+newsletter = 0
+auto_reply = 0
+spam_or_phishing = 2
+internal_info_request = 3
+unclear = 2
+
+[trust]
+min_reviewed = 50
+min_agreement = 0.95
